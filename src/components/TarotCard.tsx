@@ -25,7 +25,14 @@ export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {
       }}
       type="button"
     >
-      {revealed ? card.name : 'Face down'}
+      {revealed ? (
+        <img
+          alt={`${card.name} tarot card`}
+          src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
+        />
+      ) : (
+        'Face down'
+      )}
     </button>
   )
 }

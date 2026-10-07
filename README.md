@@ -27,3 +27,8 @@ update pull requests for npm packages and GitHub Actions.
 Project-created code, UI, card backs, and interpretation text use the MIT
 License. Card-face provenance must be recorded in `ATTRIBUTION.md` before any
 public-domain Rider-Waite-Smith artwork is added.
+
+## Deployment
+
+Pushes to `main` deploy the static production build to GitHub Pages. The site
+uses the `/tarot-reader/` base path required by the project Pages URL.
