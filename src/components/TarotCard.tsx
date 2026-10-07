@@ -1,10 +1,10 @@
 import type { Card } from '../domain/card'
 
 interface TarotCardProps {
-  card: Card
-  label: string
-  revealed: boolean
-  onReveal: () => void
+  readonly card: Card
+  readonly label: string
+  readonly revealed: boolean
+  readonly onReveal: () => void
 }
 
 export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {

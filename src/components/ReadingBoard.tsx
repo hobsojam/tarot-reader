@@ -3,10 +3,10 @@ import type { Spread } from '../domain/spread'
 import { TarotCard } from './TarotCard'
 
 interface ReadingBoardProps {
-  cards: readonly Card[]
-  revealedPositionIds: ReadonlySet<string>
-  spread: Spread
-  onReveal: (positionId: string) => void
+  readonly cards: readonly Card[]
+  readonly revealedPositionIds: ReadonlySet<string>
+  readonly spread: Spread
+  readonly onReveal: (positionId: string) => void
 }
 
 export function ReadingBoard({

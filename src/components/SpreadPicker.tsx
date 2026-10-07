@@ -1,9 +1,9 @@
 import type { Spread } from '../domain/spread'
 
 interface SpreadPickerProps {
-  spreads: readonly Spread[]
-  selectedId: Spread['id']
-  onSelect: (id: Spread['id']) => void
+  readonly spreads: readonly Spread[]
+  readonly selectedId: Spread['id']
+  readonly onSelect: (id: Spread['id']) => void
 }
 
 export function SpreadPicker({

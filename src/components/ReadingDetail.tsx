@@ -2,8 +2,8 @@ import type { Card } from '../domain/card'
 import type { SpreadPosition } from '../domain/spread'
 
 interface ReadingDetailProps {
-  card: Card
-  position: SpreadPosition
+  readonly card: Card
+  readonly position: SpreadPosition
 }
 
 export function ReadingDetail({ card, position }: ReadingDetailProps) {
