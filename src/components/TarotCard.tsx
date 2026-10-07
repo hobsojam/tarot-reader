@@ -32,7 +32,11 @@ export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {
           src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
         />
       ) : (
-        'Face down'
+        <img
+          alt=""
+          className="tarot-card__image"
+          src={`${import.meta.env.BASE_URL}card-back.png`}
+        />
       )}
     </button>
   )
