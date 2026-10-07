@@ -1,0 +1,38 @@
+import type { Card } from '../domain/card'
+
+interface TarotCardProps {
+  readonly card: Card
+  readonly label: string
+  readonly revealed: boolean
+  readonly onReveal: () => void
+}
+
+export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {
+  const accessibleLabel = revealed
+    ? `${label}: ${card.name} revealed`
+    : `${label}: face down`
+
+  return (
+    <button
+      aria-label={accessibleLabel}
+      className={`tarot-card${revealed ? ' tarot-card--revealed' : ''}`}
+      onClick={onReveal}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onReveal()
+        }
+      }}
+      type="button"
+    >
+      {revealed ? (
+        <img
+          alt={`${card.name} tarot card`}
+          src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
+        />
+      ) : (
+        'Face down'
+      )}
+    </button>
+  )
+}
