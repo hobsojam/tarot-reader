@@ -24,11 +24,14 @@ it('renders a revealed card face with descriptive alt text', () => {
   ).toBe('tarot-card__image')
 })
 
-it('does not expose a face-down card identity', () => {
-  render(
+it('shows a decorative back without exposing a face-down card identity', () => {
+  const { container } = render(
     <TarotCard card={card} label="Past" onReveal={() => {}} revealed={false} />,
   )
 
   expect(screen.queryByRole('img')).toBeNull()
   expect(screen.getByRole('button', { name: /past: face down/i })).toBeTruthy()
+  expect(container.querySelector('img')?.getAttribute('src')).toBe(
+    '/card-back.png',
+  )
 })

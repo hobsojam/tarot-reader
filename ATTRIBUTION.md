@@ -12,5 +12,12 @@ published before 1 January 1931. The source is used only for original card
 faces; no modern recolors, card backs, publisher branding, or guidebook text
 are included.
 
+## Card back
+
+`public/card-back.png` is a normalized copy of [Waite–Smith Tarot Roses and
+Lilies](https://commons.wikimedia.org/wiki/File:Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.svg),
+by Pamela Colman Smith. Wikimedia Commons marks the original artwork public
+domain in the United States and its country of origin.
+
 The app's card back and interpretation text are original project material
 covered by the MIT License.
