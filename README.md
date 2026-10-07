@@ -1,53 +1,73 @@
-# Tarot Reader
+# React + TypeScript + Vite
 
-A personal, static tarot-card simulator intended for local use and optional
-GitHub Pages hosting. It will shuffle a standard 78-card Rider-Waite-Smith deck
-in the browser, deal three supported spreads, and show original upright card
-interpretations. It has no accounts, persistence, analytics, backend, or AI
-integration.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Planned features
+Currently, two official plugins are available:
 
-- Three-card, five-card, and Celtic Cross layouts.
-- Face-down dealing with individual reveal, plus reveal-all and reset actions.
-- Responsive, keyboard-accessible controls and reduced-motion support.
-- Original interpretation text and clearly labelled spread positions.
-- Upright readings in the initial release; the data model reserves support for
-  reversed cards later.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Development
+## React Compiler
 
-The project will use React, TypeScript, and Vite. After initialization:
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-```sh
-npm install
-npm run dev
-npm test
-npm run lint
-npm run format:check
-npm run build
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-Development is test-driven. Add a failing test first, implement the smallest
-change that passes it, then refactor. CI must run formatting, linting, tests,
-and the production build on every pull request.
+You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
 
-## Git workflow
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-The initial repository commit may be made directly on `main`. After that,
-create a short-lived branch for every change and merge via a pull request only
-after CI passes. GitHub branch protection should block direct pushes to `main`.
-
-## Licensing and artwork
-
-Project-created code, UI, card backs, and interpretation text will be released
-under the MIT License. Original 1909 Rider-Waite-Smith card faces are planned
-as public-domain source material; `ATTRIBUTION.md` will identify the exact
-files and source before those assets are added. This project is for reflection
-and entertainment, not professional advice.
-
-## Documentation
-
-The approved product design is in
-[`docs/superpowers/specs/2026-10-07-tarot-simulator-design.md`](docs/superpowers/specs/2026-10-07-tarot-simulator-design.md).
-Contributor expectations are in [`AGENTS.md`](AGENTS.md).
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

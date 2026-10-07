@@ -47,6 +47,8 @@ Use TDD with Vitest and React Testing Library. Tests must cover unique dealing,
 all 78 deck entries, spread positions, reveal/reset behavior, and accessible
 controls. ESLint and Prettier enforce code quality. GitHub Actions must run
 format checking, linting, tests, and the production build on pull requests.
+Dependabot must open weekly update pull requests for npm packages and GitHub
+Actions, with no more than five open update pull requests at once.
 Deploy the static Vite build to GitHub Pages.
 
 Initialize version control before application scaffolding. The initial commit
