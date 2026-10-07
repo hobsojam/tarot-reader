@@ -28,6 +28,7 @@ export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {
       {revealed ? (
         <img
           alt={`${card.name} tarot card`}
+          className="tarot-card__image"
           src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
         />
       ) : (

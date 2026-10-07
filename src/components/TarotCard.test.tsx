@@ -19,6 +19,9 @@ it('renders a revealed card face with descriptive alt text', () => {
       .getByRole('img', { name: /the fool tarot card/i })
       .getAttribute('src'),
   ).toBe('/cards/the-fool.png')
+  expect(
+    screen.getByRole('img', { name: /the fool tarot card/i }).className,
+  ).toBe('tarot-card__image')
 })
 
 it('does not expose a face-down card identity', () => {
