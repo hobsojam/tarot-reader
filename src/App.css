@@ -49,6 +49,17 @@ button {
 
 .tarot-card {
   aspect-ratio: 2 / 3;
+  box-sizing: border-box;
+  display: grid;
+  overflow: hidden;
+  padding: 0;
+  place-items: center;
+  width: 100%;
+}
+
+.tarot-card__image {
+  height: 100%;
+  object-fit: cover;
   width: 100%;
 }
 
