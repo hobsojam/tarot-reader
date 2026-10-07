@@ -1,5 +1,87 @@
 .app-shell {
   margin: 0 auto;
-  max-width: 48rem;
-  padding: 4rem 1.5rem;
+  max-width: 70rem;
+  padding: 2rem 1.5rem;
+}
+
+.spread-picker,
+.reading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.spread-picker {
+  border: 0;
+}
+
+.spread-picker label,
+button {
+  cursor: pointer;
+}
+
+button {
+  border: 1px solid var(--accent-border);
+  border-radius: 0.5rem;
+  background: var(--accent-bg);
+  color: var(--text-h);
+  padding: 0.75rem 1rem;
+}
+
+.reading-board {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 2rem auto;
+  max-width: 100%;
+}
+
+.reading-position {
+  min-width: 0;
+}
+
+.reading-position h2,
+.reading-detail h2 {
+  font-size: 1rem;
+}
+
+.tarot-card {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+}
+
+.tarot-card--revealed {
+  background: var(--social-bg);
+}
+
+.reading-detail {
+  margin: 2rem auto 0;
+  max-width: 36rem;
+}
+
+@media (max-width: 40rem) {
+  .app-shell {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .reading-board {
+    gap: 0.5rem;
+  }
+
+  .tarot-card {
+    font-size: 0.75rem;
+    padding: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
