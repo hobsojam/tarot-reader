@@ -5,11 +5,18 @@ interface TarotCardProps {
   readonly label: string
   readonly revealed: boolean
   readonly onReveal: () => void
+  readonly orientation?: 'upright' | 'reversed'
 }
 
-export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {
+export function TarotCard({
+  card,
+  label,
+  revealed,
+  onReveal,
+  orientation = 'upright',
+}: TarotCardProps) {
   const accessibleLabel = revealed
-    ? `${label}: ${card.name} revealed`
+    ? `${label}: ${card.name} ${orientation} revealed`
     : `${label}: face down`
 
   return (
@@ -28,7 +35,7 @@ export function TarotCard({ card, label, revealed, onReveal }: TarotCardProps) {
       {revealed ? (
         <img
           alt={`${card.name} tarot card`}
-          className="tarot-card__image"
+          className={`tarot-card__image${orientation === 'reversed' ? ' tarot-card__image--reversed' : ''}`}
           src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
         />
       ) : (
