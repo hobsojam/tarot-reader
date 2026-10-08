@@ -29,9 +29,11 @@
 ### Task 1: Enrich spread position metadata
 
 **Files:**
+
 - Modify: `src/domain/spread.ts`, `src/data/spreads.ts`, `src/data/spreads.test.ts`
 
 **Interfaces:**
+
 - Produces: `SpreadPosition.readingOrder: number` and `SpreadPosition.prompt: string`.
 
 - [ ] Write failing tests for contiguous reading order and non-empty prompts on all positions, including Foundation.
@@ -43,6 +45,7 @@
 ### Task 2: Render reading order and position guidance
 
 **Files:**
+
 - Modify: `src/components/ReadingBoard.tsx`, `src/components/ReadingDetail.tsx`, `src/components/ReadingBoard.test.tsx`, `src/App.tsx`
 
 - [ ] Write failing tests for numbered position labels, an accessible reading-order guide, and the Foundation prompt.
@@ -55,6 +58,7 @@
 ### Task 3: Implement responsive workspace sizing
 
 **Files:**
+
 - Modify: `src/App.css`, `src/components/ReadingBoard.tsx`, `src/components/ReadingBoard.test.tsx`
 
 - [ ] Write a failing test that identifies the Celtic Cross workspace modifier.
