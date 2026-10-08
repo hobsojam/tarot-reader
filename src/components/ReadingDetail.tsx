@@ -30,7 +30,7 @@ export function ReadingDetail({ card, position }: ReadingDetailProps) {
       </section>
       <section aria-labelledby="contextual-meaning">
         <h4 id="contextual-meaning">In this reading</h4>
-        <p>{synthesizeInterpretation(card, position, card.orientation)}</p>
+        <p>{synthesizeInterpretation(card, position)}</p>
       </section>
     </aside>
   )

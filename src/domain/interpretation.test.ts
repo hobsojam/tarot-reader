@@ -1,23 +1,20 @@
 import { cards } from '../data/cards'
 import { spreads } from '../data/spreads'
 import { expect, it } from 'vitest'
-import type { Card } from './card'
+import type { DealtCard } from './card'
 import { synthesizeInterpretation } from './interpretation'
 
 const celticCross = spreads.find((spread) => spread.id === 'celtic-cross')!
 const empress = cards.find((card) => card.id === 'the-empress')!
+const dealtEmpress: DealtCard = { ...empress, orientation: 'upright' }
 const self = celticCross.positions.find((position) => position.id === 'self')!
 const foundation = celticCross.positions.find(
   (position) => position.id === 'foundation',
 )!
 
 it('synthesizes distinct Self and Foundation readings from a card theme', () => {
-  const selfReading = synthesizeInterpretation(empress, self, 'upright')
-  const foundationReading = synthesizeInterpretation(
-    empress,
-    foundation,
-    'upright',
-  )
+  const selfReading = synthesizeInterpretation(dealtEmpress, self)
+  const foundationReading = synthesizeInterpretation(dealtEmpress, foundation)
 
   expect(selfReading).toContain('nurturing')
   expect(foundationReading).toContain('nurturing')
@@ -25,20 +22,24 @@ it('synthesizes distinct Self and Foundation readings from a card theme', () => 
 })
 
 it('falls back to the card name when a card has no themes', () => {
-  const card: Card = {
+  const card: DealtCard = {
     id: 'test-card',
     name: 'Test Card',
     uprightMeaning: 'A test meaning.',
     themes: [],
+    orientation: 'upright',
   }
 
-  expect(synthesizeInterpretation(card, self, 'upright')).toContain('Test Card')
+  expect(synthesizeInterpretation(card, self)).toContain('Test Card')
 })
 
-it('accepts reversed orientation while upright-only synthesis is in effect', () => {
-  expect(synthesizeInterpretation(empress, self, 'reversed')).toBe(
-    synthesizeInterpretation(empress, self, 'upright'),
-  )
+it('accepts a reversed dealt card while upright-only synthesis is in effect', () => {
+  expect(
+    synthesizeInterpretation(
+      { ...dealtEmpress, orientation: 'reversed' },
+      self,
+    ),
+  ).toBe(synthesizeInterpretation(dealtEmpress, self))
 })
 
 it('frames the Near Future as a possibility rather than a certainty', () => {
@@ -46,7 +47,7 @@ it('frames the Near Future as a possibility rather than a certainty', () => {
     (position) => position.id === 'near-future',
   )!
 
-  expect(synthesizeInterpretation(empress, nearFuture, 'upright')).toContain(
+  expect(synthesizeInterpretation(dealtEmpress, nearFuture)).toContain(
     'might become relevant',
   )
 })
