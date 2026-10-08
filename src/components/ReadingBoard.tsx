@@ -16,7 +16,10 @@ export function ReadingBoard({
   onReveal,
 }: ReadingBoardProps) {
   return (
-    <section aria-label={`${spread.name} reading`} className="reading-board">
+    <section
+      aria-label={`${spread.name} reading`}
+      className={`reading-board${spread.id === 'celtic-cross' ? ' reading-board--celtic-cross' : ''}`}
+    >
       {spread.positions.map((position, index) => {
         const card = cards[index]
 
@@ -39,6 +42,13 @@ export function ReadingBoard({
           </div>
         )
       })}
+      <ol aria-label="Reading order" className="reading-order">
+        {spread.positions.map((position) => (
+          <li key={position.id}>
+            {position.readingOrder}. {position.label}: {position.prompt}
+          </li>
+        ))}
+      </ol>
     </section>
   )
 }

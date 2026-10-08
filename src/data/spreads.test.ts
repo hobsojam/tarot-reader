@@ -48,4 +48,22 @@ describe('spreads', () => {
       ).toBe(expected.count)
     }
   })
+
+  it('gives every position a contiguous reading order and explanatory prompt', () => {
+    for (const spread of spreads) {
+      expect(spread.positions.map((position) => position.readingOrder)).toEqual(
+        Array.from(
+          { length: spread.positions.length },
+          (_, index) => index + 1,
+        ),
+      )
+      expect(
+        spread.positions.every((position) => position.prompt.length > 0),
+      ).toBe(true)
+    }
+
+    expect(getSpread('celtic-cross')?.positions[2].prompt).toMatch(
+      /underlying influence|root condition/i,
+    )
+  })
 })
