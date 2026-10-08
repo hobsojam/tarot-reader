@@ -1,9 +1,9 @@
-import type { Card } from '../domain/card'
+import type { DealtCard } from '../domain/card'
 import type { Spread } from '../domain/spread'
 import { TarotCard } from './TarotCard'
 
 interface ReadingBoardProps {
-  readonly cards: readonly Card[]
+  readonly cards: readonly DealtCard[]
   readonly revealedPositionIds: ReadonlySet<string>
   readonly spread: Spread
   readonly onReveal: (positionId: string) => void
@@ -33,6 +33,7 @@ export function ReadingBoard({
               card={card}
               label={position.label}
               onReveal={() => onReveal(position.id)}
+              orientation={card.orientation}
               revealed={revealedPositionIds.has(position.id)}
             />
           </div>

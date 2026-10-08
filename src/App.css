@@ -63,6 +63,10 @@ button {
   width: 100%;
 }
 
+.tarot-card__image--reversed {
+  transform: rotate(180deg);
+}
+
 .tarot-card--revealed {
   background: var(--social-bg);
 }

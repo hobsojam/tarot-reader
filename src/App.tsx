@@ -4,12 +4,12 @@ import { ReadingBoard } from './components/ReadingBoard'
 import { ReadingDetail } from './components/ReadingDetail'
 import { SpreadPicker } from './components/SpreadPicker'
 import { spreads } from './data/spreads'
-import { createDeck, deal, shuffleDeck } from './domain/deck'
-import type { Card } from './domain/card'
+import { createDeck, deal, orientCards, shuffleDeck } from './domain/deck'
+import type { DealtCard } from './domain/card'
 import type { Spread } from './domain/spread'
 
 interface ReadingSession {
-  cards: readonly Card[]
+  cards: readonly DealtCard[]
   revealedPositionIds: ReadonlySet<string>
   selectedPositionId: string | null
 }
@@ -18,6 +18,7 @@ function App() {
   const [selectedSpreadId, setSelectedSpreadId] =
     useState<Spread['id']>('three-card')
   const [session, setSession] = useState<ReadingSession | null>(null)
+  const [includeReversals, setIncludeReversals] = useState(false)
   const selectedSpread = spreads.find(
     (spread) => spread.id === selectedSpreadId,
   )!
@@ -28,7 +29,9 @@ function App() {
       selectedSpread.positions.length,
     )
     setSession({
-      cards: dealt,
+      cards: includeReversals
+        ? orientCards(dealt)
+        : orientCards(dealt, Math.random, 0),
       revealedPositionIds: new Set(),
       selectedPositionId: null,
     })
@@ -78,6 +81,14 @@ function App() {
             selectedId={selectedSpreadId}
             spreads={spreads}
           />
+          <label>
+            <input
+              checked={includeReversals}
+              onChange={(event) => setIncludeReversals(event.target.checked)}
+              type="checkbox"
+            />{' '}
+            Include reversals
+          </label>
           <button onClick={startReading} type="button">
             Start reading
           </button>

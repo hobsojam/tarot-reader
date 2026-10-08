@@ -1,5 +1,5 @@
 import { cards } from '../data/cards'
-import type { Card } from './card'
+import type { Card, DealtCard } from './card'
 
 export const createDeck = (): Card[] => [...cards]
 
@@ -32,3 +32,13 @@ export const deal = (
 
   return { dealt: deck.slice(0, count), remaining: deck.slice(count) }
 }
+
+export const orientCards = (
+  cards: readonly Card[],
+  random = Math.random,
+  reversedChance = 0.2,
+): DealtCard[] =>
+  cards.map((card) => ({
+    ...card,
+    orientation: random() < reversedChance ? 'reversed' : 'upright',
+  }))

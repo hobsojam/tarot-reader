@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createDeck, deal, shuffleDeck } from './deck'
+import { createDeck, deal, orientCards, shuffleDeck } from './deck'
 
 describe('tarot deck', () => {
   it('creates 78 cards with unique identifiers', () => {
@@ -27,6 +27,17 @@ describe('tarot deck', () => {
 
     expect(shuffled.map((card) => card.id).sort()).toEqual(
       deck.map((card) => card.id).sort(),
+    )
+  })
+
+  it('marks cards reversed when a random draw falls within the configured chance', () => {
+    const cards = createDeck().slice(0, 2)
+
+    expect(orientCards(cards, () => 0.19)).toEqual(
+      cards.map((card) => ({ ...card, orientation: 'reversed' })),
+    )
+    expect(orientCards(cards, () => 0.2)).toEqual(
+      cards.map((card) => ({ ...card, orientation: 'upright' })),
     )
   })
 })
