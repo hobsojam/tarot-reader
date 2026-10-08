@@ -8,6 +8,7 @@ import {
 import { afterEach, expect, it } from 'vitest'
 
 import App from '../App'
+import { cards } from '../data/cards'
 
 afterEach(cleanup)
 
@@ -45,5 +46,46 @@ it('explains the numbered reading order for the selected spread', () => {
   expect(screen.getByText(/3\. foundation/i)).toBeTruthy()
   expect(
     screen.getByText(/underlying influence or root condition/i),
+  ).toBeTruthy()
+})
+
+it('guides the reader before selection and separates contextual meanings after reveal', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: /three card/i }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  const detail = screen.getByRole('complementary', {
+    name: /card interpretation/i,
+  })
+  expect(
+    within(detail).getByText(
+      'Reveal a card to see its contextual interpretation.',
+    ),
+  ).toBeTruthy()
+
+  const pastCard = screen.getByRole('button', { name: /past: face down/i })
+  fireEvent.click(pastCard)
+
+  const revealedName = within(detail).getByRole('heading', {
+    level: 3,
+  }).textContent!
+  const revealedCard = cards.find((card) => card.name === revealedName)!
+
+  expect(
+    within(detail).getByRole('heading', { name: /card meaning/i }),
+  ).toBeTruthy()
+  expect(
+    within(detail).getByRole('heading', { name: /position meaning/i }),
+  ).toBeTruthy()
+  expect(
+    within(detail).getByRole('heading', { name: /in this reading/i }),
+  ).toBeTruthy()
+  expect(within(detail).getByText(revealedCard.uprightMeaning)).toBeTruthy()
+  expect(within(detail).getByText('What has shaped this moment.')).toBeTruthy()
+  expect(
+    within(detail).getByText(
+      /as a formative influence that still informs the present/i,
+    ),
   ).toBeTruthy()
 })
