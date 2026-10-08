@@ -38,6 +38,21 @@ button {
   max-width: 100%;
 }
 
+.reading-board--celtic-cross {
+  gap: 0.5rem;
+  max-width: min(52rem, 100%);
+}
+
+.reading-board--celtic-cross .tarot-card {
+  max-height: 10rem;
+}
+
+.reading-order {
+  grid-column: 1 / -1;
+  margin: 1rem 0 0;
+  text-align: left;
+}
+
 .reading-position {
   min-width: 0;
 }

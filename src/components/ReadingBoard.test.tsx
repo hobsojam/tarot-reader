@@ -31,3 +31,19 @@ it('deals three face-down positions and reveals a card with keyboard activation'
     ).getByRole('heading', { name: /past/i }),
   ).toBeTruthy()
 })
+
+it('explains the numbered reading order for the selected spread', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  expect(
+    screen.getByRole('region', { name: /celtic cross reading/i }).className,
+  ).toMatch(/reading-board--celtic-cross/)
+  expect(screen.getByRole('list', { name: /reading order/i })).toBeTruthy()
+  expect(screen.getByText(/3\. foundation/i)).toBeTruthy()
+  expect(
+    screen.getByText(/underlying influence or root condition/i),
+  ).toBeTruthy()
+})

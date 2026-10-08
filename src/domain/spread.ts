@@ -3,6 +3,8 @@ export interface SpreadPosition {
   label: string
   row: number
   column: number
+  readingOrder: number
+  prompt: string
 }
 
 export interface Spread {
