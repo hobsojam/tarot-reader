@@ -9,6 +9,7 @@ const card = {
   id: 'the-fool',
   name: 'The Fool',
   uprightMeaning: 'Beginnings and trust.',
+  themes: ['beginnings'],
 }
 
 it('renders a revealed card face with descriptive alt text', () => {

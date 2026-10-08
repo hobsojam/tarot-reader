@@ -109,12 +109,14 @@ function App() {
             revealedPositionIds={session.revealedPositionIds}
             spread={selectedSpread}
           />
-          {selectedIndex >= 0 && session.cards[selectedIndex] ? (
-            <ReadingDetail
-              card={session.cards[selectedIndex]}
-              position={selectedSpread.positions[selectedIndex]}
-            />
-          ) : null}
+          <ReadingDetail
+            card={selectedIndex >= 0 ? session.cards[selectedIndex] : undefined}
+            position={
+              selectedIndex >= 0
+                ? selectedSpread.positions[selectedIndex]
+                : undefined
+            }
+          />
         </>
       )}
     </main>

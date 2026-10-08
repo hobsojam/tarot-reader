@@ -57,6 +57,31 @@ const majorArcana: readonly [string, string, string][] = [
   ['the-world', 'The World', 'Completion, integration, and wholeness.'],
 ]
 
+const majorArcanaThemes: Readonly<Record<string, string>> = {
+  'the-fool': 'beginnings',
+  'the-magician': 'skill',
+  'the-high-priestess': 'intuition',
+  'the-empress': 'nurturing',
+  'the-emperor': 'structure',
+  'the-hierophant': 'tradition',
+  'the-lovers': 'connection',
+  'the-chariot': 'determination',
+  strength: 'courage',
+  'the-hermit': 'reflection',
+  'wheel-of-fortune': 'change',
+  justice: 'fairness',
+  'the-hanged-man': 'perspective',
+  death: 'transformation',
+  temperance: 'balance',
+  'the-devil': 'attachment',
+  'the-tower': 'revelation',
+  'the-star': 'hope',
+  'the-moon': 'uncertainty',
+  'the-sun': 'joy',
+  judgement: 'awakening',
+  'the-world': 'completion',
+}
+
 const ranks = [
   'Ace',
   'Two',
@@ -81,6 +106,13 @@ const suits: readonly [string, string][] = [
   ['Pentacles', 'resources, work, and the material world'],
 ]
 
+const minorArcanaThemes: Readonly<Record<string, string>> = {
+  Wands: 'creative energy',
+  Cups: 'emotional connection',
+  Swords: 'clear thinking',
+  Pentacles: 'practical resources',
+}
+
 const slugify = (value: string) => value.toLowerCase().replaceAll(' ', '-')
 
 const minorArcana = suits.flatMap(([suit, theme]) =>
@@ -88,6 +120,7 @@ const minorArcana = suits.flatMap(([suit, theme]) =>
     id: `${slugify(rank)}-of-${slugify(suit)}`,
     name: `${rank} of ${suit}`,
     uprightMeaning: `${rank} invites reflection on ${theme}.`,
+    themes: [minorArcanaThemes[suit]],
   })),
 )
 
@@ -96,6 +129,7 @@ export const cards: readonly Card[] = [
     id,
     name,
     uprightMeaning,
+    themes: [majorArcanaThemes[id]],
   })),
   ...minorArcana,
 ]

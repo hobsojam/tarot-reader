@@ -5,6 +5,8 @@ export interface SpreadPosition {
   column: number
   readingOrder: number
   prompt: string
+  lens: string
+  synthesisTemplate: string
 }
 
 export interface Spread {
