@@ -41,6 +41,16 @@ it('accepts reversed orientation while upright-only synthesis is in effect', () 
   )
 })
 
+it('frames the Near Future as a possibility rather than a certainty', () => {
+  const nearFuture = celticCross.positions.find(
+    (position) => position.id === 'near-future',
+  )!
+
+  expect(synthesizeInterpretation(empress, nearFuture, 'upright')).toContain(
+    'might become relevant',
+  )
+})
+
 it('gives every spread position a unique lens and template', () => {
   const positions = spreads.flatMap((spread) => spread.positions)
   const lenses = positions.map((position) => position.lens)

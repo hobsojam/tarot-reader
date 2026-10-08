@@ -169,7 +169,7 @@ export const spreads: readonly Spread[] = [
         prompt: 'What is approaching soon.',
         lens: 'Near horizon',
         synthesisTemplate:
-          'In the near horizon, prepare to recognize {theme} as it approaches.',
+          'In the near horizon, consider how {theme} might become relevant.',
       },
       {
         id: 'self',
