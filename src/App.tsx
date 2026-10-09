@@ -2,6 +2,7 @@ import './App.css'
 import { useState } from 'react'
 import { ReadingBoard } from './components/ReadingBoard'
 import { ReadingDetail } from './components/ReadingDetail'
+import { ReadingGuide } from './components/ReadingGuide'
 import { SpreadPicker } from './components/SpreadPicker'
 import { spreads } from './data/spreads'
 import { createDeck, deal, orientCards, shuffleDeck } from './domain/deck'
@@ -103,20 +104,30 @@ function App() {
               New reading
             </button>
           </div>
-          <ReadingBoard
-            cards={session.cards}
-            onReveal={revealPosition}
-            revealedPositionIds={session.revealedPositionIds}
-            spread={selectedSpread}
-          />
-          <ReadingDetail
-            card={selectedIndex >= 0 ? session.cards[selectedIndex] : undefined}
-            position={
-              selectedIndex >= 0
-                ? selectedSpread.positions[selectedIndex]
-                : undefined
-            }
-          />
+          <section
+            aria-label={`${selectedSpread.name} workspace`}
+            className={`reading-workspace${selectedSpread.id === 'celtic-cross' ? ' reading-workspace--celtic-cross' : ''}`}
+          >
+            <ReadingBoard
+              cards={session.cards}
+              onReveal={revealPosition}
+              revealedPositionIds={session.revealedPositionIds}
+              spread={selectedSpread}
+            />
+            <div className="reading-sidebar">
+              <ReadingGuide spread={selectedSpread} />
+              <ReadingDetail
+                card={
+                  selectedIndex >= 0 ? session.cards[selectedIndex] : undefined
+                }
+                position={
+                  selectedIndex >= 0
+                    ? selectedSpread.positions[selectedIndex]
+                    : undefined
+                }
+              />
+            </div>
+          </section>
         </>
       )}
     </main>
