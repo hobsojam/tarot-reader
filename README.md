@@ -22,6 +22,17 @@ smallest change that passes it, then refactor. CI runs formatting, linting,
 tests, and the production build on each pull request. Dependabot opens weekly
 update pull requests for npm packages and GitHub Actions.
 
+## Reversals
+
+Readings include reversed cards by default, each with an independent 20% chance.
+To start a cautious upright-only local session or build an upright-only bundle,
+set `VITE_DISABLE_REVERSALS=true` before the Vite command:
+
+```sh
+VITE_DISABLE_REVERSALS=true npm run dev
+VITE_DISABLE_REVERSALS=true npm run build
+```
+
 ## Licensing and artwork
 
 Project-created code, UI, card backs, and interpretation text use the MIT
