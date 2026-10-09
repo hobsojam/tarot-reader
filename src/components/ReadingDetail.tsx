@@ -1,5 +1,8 @@
 import type { DealtCard } from '../domain/card'
-import { synthesizeInterpretation } from '../domain/interpretation'
+import {
+  getCardMeaning,
+  synthesizeInterpretation,
+} from '../domain/interpretation'
 import type { SpreadPosition } from '../domain/spread'
 
 interface ReadingDetailProps {
@@ -19,10 +22,12 @@ export function ReadingDetail({ card, position }: ReadingDetailProps) {
   return (
     <aside aria-label="Card interpretation" className="reading-detail">
       <h2>{position.label}</h2>
-      <h3>{card.name}</h3>
+      <h3>
+        {card.name} — {card.orientation === 'upright' ? 'Upright' : 'Reversed'}
+      </h3>
       <section aria-labelledby="card-meaning">
         <h4 id="card-meaning">Card meaning</h4>
-        <p>{card.uprightMeaning}</p>
+        <p>{getCardMeaning(card)}</p>
       </section>
       <section aria-labelledby="position-meaning">
         <h4 id="position-meaning">Position meaning</h4>

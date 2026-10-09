@@ -67,9 +67,12 @@ it('guides the reader before selection and separates contextual meanings after r
   const pastCard = screen.getByRole('button', { name: /past: face down/i })
   fireEvent.click(pastCard)
 
-  const revealedName = within(detail).getByRole('heading', {
+  const revealedHeading = within(detail).getByRole('heading', {
     level: 3,
   }).textContent!
+  const [, revealedName, orientation] = revealedHeading.match(
+    /^(.+) — (Upright|Reversed)$/,
+  )!
   const revealedCard = cards.find((card) => card.name === revealedName)!
 
   expect(
@@ -81,7 +84,13 @@ it('guides the reader before selection and separates contextual meanings after r
   expect(
     within(detail).getByRole('heading', { name: /in this reading/i }),
   ).toBeTruthy()
-  expect(within(detail).getByText(revealedCard.uprightMeaning)).toBeTruthy()
+  expect(
+    within(detail).getByText(
+      orientation === 'Reversed'
+        ? revealedCard.reversedMeaning
+        : revealedCard.uprightMeaning,
+    ),
+  ).toBeTruthy()
   expect(within(detail).getByText('What has shaped this moment.')).toBeTruthy()
   expect(
     within(detail).getByText(
