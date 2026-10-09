@@ -2,7 +2,11 @@ import { cards } from '../data/cards'
 import { spreads } from '../data/spreads'
 import { expect, it } from 'vitest'
 import type { DealtCard } from './card'
-import { getCardMeaning, synthesizeInterpretation } from './interpretation'
+import {
+  getCardMeaning,
+  synthesizeInterpretation,
+  synthesizeReadingNarrative,
+} from './interpretation'
 
 const celticCross = spreads.find((spread) => spread.id === 'celtic-cross')!
 const empress = cards.find((card) => card.id === 'the-empress')!
@@ -82,6 +86,19 @@ it('frames the Near Future as a possibility rather than a certainty', () => {
   expect(synthesizeInterpretation(dealtEmpress, nearFuture)).toContain(
     'might become relevant',
   )
+})
+
+it('builds a progressive narrative in reading order and notes reversed cards', () => {
+  const narrative = synthesizeReadingNarrative([
+    { card: { ...dealtEmpress, orientation: 'reversed' }, position: self },
+    { card: dealtEmpress, position: foundation },
+  ])
+
+  expect(narrative.indexOf('Foundation')).toBeLessThan(
+    narrative.indexOf('Self'),
+  )
+  expect(narrative).toContain('appears reversed')
+  expect(synthesizeReadingNarrative([])).toBe('')
 })
 
 it('gives every spread position a unique lens and template', () => {

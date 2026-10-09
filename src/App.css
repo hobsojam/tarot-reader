@@ -113,6 +113,16 @@ button {
   max-width: none;
 }
 
+.reading-narrative {
+  margin: 0 auto 2rem;
+  max-width: 70rem;
+  text-align: left;
+}
+
+.reading-narrative h2 {
+  font-size: 1.25rem;
+}
+
 @media (max-width: 52rem) {
   .reading-workspace {
     grid-template-columns: 1fr;
