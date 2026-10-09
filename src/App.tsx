@@ -28,6 +28,7 @@ function App() {
   const [selectedFocusId, setSelectedFocusId] =
     useState<ReadingFocusId>('general-guidance')
   const [customQuestion, setCustomQuestion] = useState('')
+  const [showReflection, setShowReflection] = useState(false)
   const selectedSpread = spreads.find(
     (spread) => spread.id === selectedSpreadId,
   )!
@@ -43,6 +44,7 @@ function App() {
       shuffleDeck(createDeck()),
       selectedSpread.positions.length,
     )
+    setShowReflection(false)
     setSession({
       cards: orientCards(dealt, Math.random, reversedChance),
       customQuestion:
@@ -80,6 +82,11 @@ function App() {
     )
   }
 
+  const startNewReading = () => {
+    setShowReflection(false)
+    setSession(null)
+  }
+
   const selectedIndex = session?.selectedPositionId
     ? selectedSpread.positions.findIndex(
         (position) => position.id === session.selectedPositionId,
@@ -99,6 +106,8 @@ function App() {
           : session.focus.narrativeFraming,
       )
     : ''
+  const isReadingComplete =
+    session?.revealedPositionIds.size === selectedSpread.positions.length
 
   return (
     <main className="app-shell">
@@ -148,7 +157,12 @@ function App() {
             <button onClick={revealAll} type="button">
               Reveal all
             </button>
-            <button onClick={() => setSession(null)} type="button">
+            {isReadingComplete ? (
+              <button onClick={() => setShowReflection(true)} type="button">
+                Reflect on this reading
+              </button>
+            ) : null}
+            <button onClick={startNewReading} type="button">
               New reading
             </button>
           </div>
@@ -183,6 +197,25 @@ function App() {
             <section aria-label="Reading so far" className="reading-narrative">
               <h2>Reading so far</h2>
               <p>{readingNarrative}</p>
+            </section>
+          ) : null}
+          {showReflection ? (
+            <section aria-label="Reflection" className="reading-reflection">
+              <h2>Reflection</h2>
+              <h3>Completed thread</h3>
+              <p>{readingNarrative}</p>
+              <h3>Reflection prompts</h3>
+              <ol>
+                <li>
+                  What part of this completed thread feels most alive for you
+                  now?
+                </li>
+                <li>
+                  {session.customQuestion
+                    ? 'What small action could honor your question?'
+                    : `What small action could honor your focus on ${session.focus.label.toLowerCase()}?`}
+                </li>
+              </ol>
             </section>
           ) : null}
         </>

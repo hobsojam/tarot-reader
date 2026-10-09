@@ -147,6 +147,16 @@ button {
   font-size: 1.25rem;
 }
 
+.reading-reflection {
+  margin: 0 auto 2rem;
+  max-width: 70rem;
+  text-align: left;
+}
+
+.reading-reflection h2 {
+  font-size: 1.5rem;
+}
+
 @media (max-width: 52rem) {
   .reading-workspace {
     grid-template-columns: 1fr;
