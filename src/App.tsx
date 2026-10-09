@@ -6,6 +6,7 @@ import { ReadingGuide } from './components/ReadingGuide'
 import { SpreadPicker } from './components/SpreadPicker'
 import { spreads } from './data/spreads'
 import { createDeck, deal, orientCards, shuffleDeck } from './domain/deck'
+import { synthesizeReadingNarrative } from './domain/interpretation'
 import { reversedChanceFromStartupOption } from './domain/reversals'
 import type { DealtCard } from './domain/card'
 import type { Spread } from './domain/spread'
@@ -71,6 +72,17 @@ function App() {
         (position) => position.id === session.selectedPositionId,
       )
     : -1
+  const readingNarrative = session
+    ? synthesizeReadingNarrative(
+        session.cards.flatMap((card, index) => {
+          const position = selectedSpread.positions[index]
+
+          return session.revealedPositionIds.has(position.id)
+            ? [{ card, position }]
+            : []
+        }),
+      )
+    : ''
 
   return (
     <main className="app-shell">
@@ -121,6 +133,12 @@ function App() {
               />
             </div>
           </section>
+          {readingNarrative ? (
+            <section aria-label="Reading so far" className="reading-narrative">
+              <h2>Reading so far</h2>
+              <p>{readingNarrative}</p>
+            </section>
+          ) : null}
         </>
       )}
     </main>

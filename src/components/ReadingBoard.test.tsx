@@ -118,3 +118,18 @@ it('guides the reader before selection and separates contextual meanings after r
     ),
   ).toBeTruthy()
 })
+
+it('adds a progressive narrative after a card is revealed', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  expect(screen.queryByRole('region', { name: /reading so far/i })).toBeNull()
+
+  fireEvent.click(screen.getByRole('button', { name: /past: face down/i }))
+
+  expect(
+    within(screen.getByRole('region', { name: /reading so far/i })).getByText(
+      /at past,/i,
+    ),
+  ).toBeTruthy()
+})
