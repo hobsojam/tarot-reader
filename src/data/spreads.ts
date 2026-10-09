@@ -4,6 +4,7 @@ export const spreads: readonly Spread[] = [
   {
     id: 'three-card',
     name: 'Three Card',
+    reflectionAnchorPositionId: 'present',
     positions: [
       {
         id: 'past',
@@ -43,6 +44,7 @@ export const spreads: readonly Spread[] = [
   {
     id: 'five-card',
     name: 'Five Card',
+    reflectionAnchorPositionId: 'situation',
     positions: [
       {
         id: 'situation',
@@ -104,6 +106,7 @@ export const spreads: readonly Spread[] = [
   {
     id: 'celtic-cross',
     name: 'Celtic Cross',
+    reflectionAnchorPositionId: 'present',
     positions: [
       {
         id: 'present',

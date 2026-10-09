@@ -13,4 +13,5 @@ export interface Spread {
   id: 'three-card' | 'five-card' | 'celtic-cross'
   name: string
   positions: readonly SpreadPosition[]
+  reflectionAnchorPositionId: string
 }

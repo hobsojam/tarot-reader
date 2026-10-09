@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { ReadingBoard } from './components/ReadingBoard'
 import { ReadingDetail } from './components/ReadingDetail'
 import { ReadingGuide } from './components/ReadingGuide'
+import { ReflectionAnchorCard } from './components/ReflectionAnchorCard'
 import { SpreadPicker } from './components/SpreadPicker'
 import { readingFocuses } from './data/reading-focuses'
 import { spreads } from './data/spreads'
@@ -108,6 +109,16 @@ function App() {
     : ''
   const isReadingComplete =
     session?.revealedPositionIds.size === selectedSpread.positions.length
+  const reflectionAnchorIndex = selectedSpread.positions.findIndex(
+    (position) => position.id === selectedSpread.reflectionAnchorPositionId,
+  )
+  const reflectionAnchor =
+    session && reflectionAnchorIndex >= 0
+      ? {
+          card: session.cards[reflectionAnchorIndex],
+          position: selectedSpread.positions[reflectionAnchorIndex],
+        }
+      : undefined
 
   return (
     <main className="app-shell">
@@ -202,6 +213,12 @@ function App() {
           {showReflection ? (
             <section aria-label="Reflection" className="reading-reflection">
               <h2>Reflection</h2>
+              {reflectionAnchor ? (
+                <ReflectionAnchorCard
+                  card={reflectionAnchor.card}
+                  position={reflectionAnchor.position}
+                />
+              ) : null}
               <h3>Completed thread</h3>
               <p>{readingNarrative}</p>
               <h3>Reflection prompts</h3>

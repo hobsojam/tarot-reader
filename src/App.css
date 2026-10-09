@@ -157,6 +157,29 @@ button {
   font-size: 1.5rem;
 }
 
+.reflection-anchor {
+  border-block: 1px solid var(--accent-border);
+  margin: 1.5rem 0;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.reflection-anchor h3 {
+  font-size: 1rem;
+}
+
+.reflection-anchor__image {
+  aspect-ratio: 2 / 3;
+  display: block;
+  margin: 1rem auto;
+  object-fit: cover;
+  width: min(12rem, 100%);
+}
+
+.reflection-anchor__image--reversed {
+  transform: rotate(180deg);
+}
+
 @media (max-width: 52rem) {
   .reading-workspace {
     grid-template-columns: 1fr;

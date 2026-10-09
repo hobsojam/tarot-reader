@@ -97,6 +97,12 @@ it('opens reflection prompts only after every card is revealed', () => {
   expect(
     within(reflection).getByRole('heading', { name: /completed thread/i }),
   ).toBeTruthy()
+  const centerCard = within(reflection).getByRole('region', {
+    name: /center of the reading/i,
+  })
+  expect(
+    within(centerCard).getByRole('img', { name: /present.*tarot card/i }),
+  ).toBeTruthy()
   expect(
     within(reflection).getByText(/what part of this completed thread/i),
   ).toBeTruthy()
