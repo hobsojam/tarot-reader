@@ -24,16 +24,18 @@ it('reveals all cards and starts a fresh reading', () => {
   expect(screen.getByRole('button', { name: /start reading/i })).toBeTruthy()
 })
 
-it('deals reversed cards only when reversals are enabled', () => {
+it('deals reversed cards by default', () => {
   vi.spyOn(Math, 'random').mockReturnValue(0)
   render(<App />)
 
-  fireEvent.click(screen.getByRole('checkbox', { name: /include reversals/i }))
   fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /past: face down/i }))
 
   expect(
     screen.getByRole('button', { name: /past: .+ reversed/i }),
   ).toBeTruthy()
+  expect(
+    screen.queryByRole('checkbox', { name: /include reversals/i }),
+  ).toBeNull()
   vi.restoreAllMocks()
 })
