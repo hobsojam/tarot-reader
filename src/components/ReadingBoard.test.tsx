@@ -42,8 +42,11 @@ it('explains the numbered reading order for the selected spread', () => {
   expect(
     screen.getByRole('region', { name: /celtic cross reading/i }).className,
   ).toMatch(/reading-board--celtic-cross/)
-  expect(screen.getByRole('list', { name: /reading order/i })).toBeTruthy()
-  expect(screen.getByText(/3\. foundation/i)).toBeTruthy()
+  const readingOrder = screen.getByRole('list', { name: /reading order/i })
+  expect(readingOrder).toBeTruthy()
+  expect(within(readingOrder).getByText(/foundation:/i).textContent).toBe(
+    'Foundation: The underlying influence or root condition.',
+  )
   expect(
     screen.getByText(/underlying influence or root condition/i),
   ).toBeTruthy()

@@ -45,7 +45,7 @@ export function ReadingBoard({
       <ol aria-label="Reading order" className="reading-order">
         {spread.positions.map((position) => (
           <li key={position.id}>
-            {position.readingOrder}. {position.label}: {position.prompt}
+            {position.label}: {position.prompt}
           </li>
         ))}
       </ol>
