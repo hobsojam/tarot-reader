@@ -34,23 +34,41 @@ button {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  margin: 2rem auto;
+  margin: 0 auto;
   max-width: 100%;
 }
 
 .reading-board--celtic-cross {
   gap: 0.5rem;
-  max-width: min(52rem, 100%);
+  max-width: min(36rem, 100%);
 }
 
-.reading-board--celtic-cross .tarot-card {
-  max-height: 10rem;
+.reading-workspace {
+  align-items: start;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 24rem);
+  margin: 2rem auto;
+}
+
+.reading-sidebar {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.reading-guide {
+  text-align: left;
+}
+
+.reading-guide h2 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
 }
 
 .reading-order {
-  grid-column: 1 / -1;
-  margin: 1rem 0 0;
-  text-align: left;
+  margin: 0;
+  padding-inline-start: 1.5rem;
 }
 
 .reading-position {
@@ -60,6 +78,10 @@ button {
 .reading-position h2,
 .reading-detail h2 {
   font-size: 1rem;
+}
+
+.reading-position h2 {
+  margin: 0 0 0.25rem;
 }
 
 .tarot-card {
@@ -87,8 +109,18 @@ button {
 }
 
 .reading-detail {
-  margin: 2rem auto 0;
-  max-width: 36rem;
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 52rem) {
+  .reading-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .reading-sidebar {
+    grid-row: 2;
+  }
 }
 
 @media (max-width: 40rem) {

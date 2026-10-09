@@ -52,6 +52,23 @@ it('explains the numbered reading order for the selected spread', () => {
   ).toBeTruthy()
 })
 
+it('groups the Celtic Cross board and reading guide in a workspace', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  const workspace = screen.getByRole('region', {
+    name: /celtic cross workspace/i,
+  })
+  expect(
+    within(workspace).getByRole('region', { name: /celtic cross reading/i }),
+  ).toBeTruthy()
+  expect(
+    within(workspace).getByRole('region', { name: /reading guide/i }),
+  ).toBeTruthy()
+})
+
 it('guides the reader before selection and separates contextual meanings after reveal', () => {
   render(<App />)
 
