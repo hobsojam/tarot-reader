@@ -2,7 +2,7 @@ import { cards } from '../data/cards'
 import { spreads } from '../data/spreads'
 import { expect, it } from 'vitest'
 import type { DealtCard } from './card'
-import { synthesizeInterpretation } from './interpretation'
+import { getCardMeaning, synthesizeInterpretation } from './interpretation'
 
 const celticCross = spreads.find((spread) => spread.id === 'celtic-cross')!
 const empress = cards.find((card) => card.id === 'the-empress')!
@@ -21,11 +21,43 @@ it('synthesizes distinct Self and Foundation readings from a card theme', () => 
   expect(selfReading).not.toBe(foundationReading)
 })
 
+it('selects original meaning from the dealt orientation', () => {
+  const card: DealtCard = {
+    id: 'test-card',
+    name: 'Test Card',
+    uprightMeaning: 'An open path.',
+    reversedMeaning: 'A pause invites reflection.',
+    themes: ['reflection'],
+    orientation: 'upright',
+  }
+
+  expect(getCardMeaning(card)).toBe('An open path.')
+  expect(getCardMeaning({ ...card, orientation: 'reversed' })).toBe(
+    'A pause invites reflection.',
+  )
+})
+
+it('gives every card original reversed copy', () => {
+  expect(cards).toHaveLength(78)
+  expect(
+    cards.every(
+      (card) =>
+        card.reversedMeaning.length > 0 &&
+        card.reversedMeaning !== card.uprightMeaning &&
+        !card.reversedMeaning.includes('{theme}'),
+    ),
+  ).toBe(true)
+  expect(cards.find((card) => card.id === 'the-fool')?.reversedMeaning).toBe(
+    'A pause around beginnings can be an invitation to prepare, not a reason to abandon the path.',
+  )
+})
+
 it('falls back to the card name when a card has no themes', () => {
   const card: DealtCard = {
     id: 'test-card',
     name: 'Test Card',
     uprightMeaning: 'A test meaning.',
+    reversedMeaning: 'A reversed test meaning.',
     themes: [],
     orientation: 'upright',
   }

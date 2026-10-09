@@ -82,6 +82,52 @@ const majorArcanaThemes: Readonly<Record<string, string>> = {
   'the-world': 'completion',
 }
 
+const majorArcanaReversedMeanings: Readonly<Record<string, string>> = {
+  'the-fool':
+    'A pause around beginnings can be an invitation to prepare, not a reason to abandon the path.',
+  'the-magician':
+    'Skill may need quieter focus before it can be used with confidence.',
+  'the-high-priestess':
+    'Inner knowing may be obscured; give intuition patient room to speak.',
+  'the-empress':
+    'Nurturing may need boundaries so care can remain sustainable.',
+  'the-emperor':
+    'Structure may be too rigid, or may need to be rebuilt with care.',
+  'the-hierophant':
+    'Tradition can be questioned thoughtfully while its useful wisdom is retained.',
+  'the-lovers':
+    'A choice may need clearer values before connection can feel wholehearted.',
+  'the-chariot':
+    'Forward movement may benefit from adjusting direction rather than forcing momentum.',
+  strength:
+    'Courage may be gathering inwardly before it becomes visible action.',
+  'the-hermit':
+    'Reflection may have become isolating; consider sharing the insight you have found.',
+  'wheel-of-fortune':
+    'A changing cycle may ask for flexibility while its pattern is still unclear.',
+  justice:
+    'Fairness may require a second look at assumptions or unspoken consequences.',
+  'the-hanged-man':
+    'A pause may be lingering; gently notice what perspective is ready to shift.',
+  death:
+    'A transition may be resisted, inviting a slower and more conscious release.',
+  temperance: 'Balance may need recalibration rather than further compromise.',
+  'the-devil':
+    'An attachment can be recognized without shame, creating room for a freer choice.',
+  'the-tower':
+    'A disruption may be processed gradually while you decide what truly needs rebuilding.',
+  'the-star':
+    'Hope may be quiet or delayed, yet small acts of care can keep it present.',
+  'the-moon':
+    'Uncertainty may be internalized; let imagination inform rather than overwhelm your next step.',
+  'the-sun':
+    'Joy may be muted for now, inviting attention to its smaller, steadier sources.',
+  judgement:
+    'A calling may need more reflection before it becomes a decisive answer.',
+  'the-world':
+    'Completion may be close but still needs integration before the next cycle begins.',
+}
+
 const ranks = [
   'Ace',
   'Two',
@@ -98,6 +144,29 @@ const ranks = [
   'Queen',
   'King',
 ] as const
+
+const minorArcanaReversedTemplates: Readonly<
+  Record<(typeof ranks)[number], string>
+> = {
+  Ace: 'A beginning in {theme} may need more preparation before it can take root.',
+  Two: 'A choice around {theme} may benefit from a gentler balance of priorities.',
+  Three:
+    'Collaboration in {theme} may need clearer expectations or more patient listening.',
+  Four: 'Stability in {theme} may be holding too tightly; consider where flexibility helps.',
+  Five: 'Tension around {theme} may soften when the underlying need is named.',
+  Six: 'Giving and receiving in {theme} may need a more reciprocal rhythm.',
+  Seven:
+    'A pause in {theme} can reveal whether effort is being placed where it matters most.',
+  Eight:
+    'Progress in {theme} may feel delayed, inviting a closer look at what is restricting it.',
+  Nine: 'Independence in {theme} may need rest or support to remain nourishing.',
+  Ten: 'A full load of {theme} may be ready to be shared, simplified, or released.',
+  Page: 'Curiosity about {theme} may need grounding before a message becomes clear.',
+  Knight:
+    'Momentum in {theme} may benefit from slowing down long enough to choose direction.',
+  Queen: 'Care for {theme} may need to turn inward as well as outward.',
+  King: 'Leadership in {theme} may be strongest when certainty makes room for reflection.',
+}
 
 const suits: readonly [string, string][] = [
   ['Wands', 'energy, creativity, and purpose'],
@@ -120,6 +189,10 @@ const minorArcana = suits.flatMap(([suit, theme]) =>
     id: `${slugify(rank)}-of-${slugify(suit)}`,
     name: `${rank} of ${suit}`,
     uprightMeaning: `${rank} invites reflection on ${theme}.`,
+    reversedMeaning: minorArcanaReversedTemplates[rank].replaceAll(
+      '{theme}',
+      minorArcanaThemes[suit],
+    ),
     themes: [minorArcanaThemes[suit]],
   })),
 )
@@ -129,6 +202,7 @@ export const cards: readonly Card[] = [
     id,
     name,
     uprightMeaning,
+    reversedMeaning: majorArcanaReversedMeanings[id],
     themes: [majorArcanaThemes[id]],
   })),
   ...minorArcana,
