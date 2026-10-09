@@ -23,8 +23,9 @@ export function synthesizeInterpretation(
 
 export function synthesizeReadingNarrative(
   revealedCards: readonly RevealedReadingCard[],
+  focus?: string,
 ): string {
-  return [...revealedCards]
+  const narrative = [...revealedCards]
     .sort(
       (left, right) => left.position.readingOrder - right.position.readingOrder,
     )
@@ -37,4 +38,8 @@ export function synthesizeReadingNarrative(
         : `At ${position.label}, ${card.name} brings ${theme} into focus through the lens of ${lens}.`
     })
     .join(' ')
+
+  return focus && narrative
+    ? `Consider this reading through the lens of ${focus}. ${narrative}`
+    : narrative
 }

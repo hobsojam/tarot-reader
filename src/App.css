@@ -17,6 +17,25 @@
   border: 0;
 }
 
+.reading-setup {
+  display: grid;
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 28rem;
+  text-align: left;
+}
+
+.reading-setup label {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.reading-setup input,
+.reading-setup select {
+  font: inherit;
+  padding: 0.5rem;
+}
+
 .spread-picker label,
 button {
   cursor: pointer;
@@ -111,6 +130,11 @@ button {
 .reading-detail {
   margin: 0;
   max-width: none;
+}
+
+.reading-focus {
+  margin: 0 auto;
+  max-width: 70rem;
 }
 
 .reading-narrative {

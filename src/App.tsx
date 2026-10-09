@@ -4,15 +4,19 @@ import { ReadingBoard } from './components/ReadingBoard'
 import { ReadingDetail } from './components/ReadingDetail'
 import { ReadingGuide } from './components/ReadingGuide'
 import { SpreadPicker } from './components/SpreadPicker'
+import { readingFocuses } from './data/reading-focuses'
 import { spreads } from './data/spreads'
 import { createDeck, deal, orientCards, shuffleDeck } from './domain/deck'
 import { synthesizeReadingNarrative } from './domain/interpretation'
 import { reversedChanceFromStartupOption } from './domain/reversals'
 import type { DealtCard } from './domain/card'
+import type { ReadingFocus, ReadingFocusId } from './domain/reading-focus'
 import type { Spread } from './domain/spread'
 
 interface ReadingSession {
   cards: readonly DealtCard[]
+  customQuestion: string
+  focus: ReadingFocus
   revealedPositionIds: ReadonlySet<string>
   selectedPositionId: string | null
 }
@@ -21,12 +25,18 @@ function App() {
   const [selectedSpreadId, setSelectedSpreadId] =
     useState<Spread['id']>('three-card')
   const [session, setSession] = useState<ReadingSession | null>(null)
+  const [selectedFocusId, setSelectedFocusId] =
+    useState<ReadingFocusId>('general-guidance')
+  const [customQuestion, setCustomQuestion] = useState('')
   const selectedSpread = spreads.find(
     (spread) => spread.id === selectedSpreadId,
   )!
   const reversedChance = reversedChanceFromStartupOption(
     import.meta.env.VITE_DISABLE_REVERSALS,
   )
+  const selectedFocus = readingFocuses.find(
+    (focus) => focus.id === selectedFocusId,
+  )!
 
   const startReading = () => {
     const { dealt } = deal(
@@ -35,6 +45,9 @@ function App() {
     )
     setSession({
       cards: orientCards(dealt, Math.random, reversedChance),
+      customQuestion:
+        selectedFocus.id === 'something-else' ? customQuestion.trim() : '',
+      focus: selectedFocus,
       revealedPositionIds: new Set(),
       selectedPositionId: null,
     })
@@ -81,6 +94,9 @@ function App() {
             ? [{ card, position }]
             : []
         }),
+        session.customQuestion
+          ? `your question, “${session.customQuestion}”`
+          : session.focus.narrativeFraming,
       )
     : ''
 
@@ -95,9 +111,36 @@ function App() {
             selectedId={selectedSpreadId}
             spreads={spreads}
           />
-          <button onClick={startReading} type="button">
-            Start reading
-          </button>
+          <div className="reading-setup">
+            <label>
+              Reading focus
+              <select
+                onChange={(event) =>
+                  setSelectedFocusId(event.target.value as ReadingFocusId)
+                }
+                value={selectedFocusId}
+              >
+                {readingFocuses.map((focus) => (
+                  <option key={focus.id} value={focus.id}>
+                    {focus.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {selectedFocusId === 'something-else' ? (
+              <label>
+                Your question
+                <input
+                  onChange={(event) => setCustomQuestion(event.target.value)}
+                  type="text"
+                  value={customQuestion}
+                />
+              </label>
+            ) : null}
+            <button onClick={startReading} type="button">
+              Start reading
+            </button>
+          </div>
         </>
       ) : (
         <>
@@ -109,6 +152,9 @@ function App() {
               New reading
             </button>
           </div>
+          <p className="reading-focus">
+            Focus: {session.customQuestion || session.focus.label}
+          </p>
           <section
             aria-label={`${selectedSpread.name} workspace`}
             className={`reading-workspace${selectedSpread.id === 'celtic-cross' ? ' reading-workspace--celtic-cross' : ''}`}
