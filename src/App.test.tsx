@@ -39,3 +39,32 @@ it('deals reversed cards by default', () => {
   ).toBeNull()
   vi.restoreAllMocks()
 })
+
+it('shows a custom question field only for the Something else focus', () => {
+  render(<App />)
+
+  expect(screen.queryByLabelText(/your question/i)).toBeNull()
+
+  fireEvent.change(screen.getByLabelText(/reading focus/i), {
+    target: { value: 'something-else' },
+  })
+
+  expect(screen.getByLabelText(/your question/i)).toBeTruthy()
+})
+
+it('uses the selected focus in the active reading narrative', () => {
+  render(<App />)
+
+  fireEvent.change(screen.getByLabelText(/reading focus/i), {
+    target: { value: 'relationships' },
+  })
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  expect(screen.getByText('Focus: Relationships')).toBeTruthy()
+
+  fireEvent.click(screen.getByRole('button', { name: /past: face down/i }))
+
+  expect(
+    screen.getByRole('region', { name: /reading so far/i }).textContent,
+  ).toMatch(/lens of relationship patterns/i)
+})
