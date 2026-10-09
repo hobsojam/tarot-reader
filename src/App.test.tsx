@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import App from './App'
 
@@ -67,4 +73,32 @@ it('uses the selected focus in the active reading narrative', () => {
   expect(
     screen.getByRole('region', { name: /reading so far/i }).textContent,
   ).toMatch(/lens of relationship patterns/i)
+})
+
+it('opens reflection prompts only after every card is revealed', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  expect(
+    screen.queryByRole('button', { name: /reflect on this reading/i }),
+  ).toBeNull()
+
+  fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
+  expect(
+    screen.getByRole('button', { name: /reflect on this reading/i }),
+  ).toBeTruthy()
+  expect(screen.queryByRole('region', { name: /reflection/i })).toBeNull()
+
+  fireEvent.click(
+    screen.getByRole('button', { name: /reflect on this reading/i }),
+  )
+
+  const reflection = screen.getByRole('region', { name: /reflection/i })
+  expect(
+    within(reflection).getByRole('heading', { name: /completed thread/i }),
+  ).toBeTruthy()
+  expect(
+    within(reflection).getByText(/what part of this completed thread/i),
+  ).toBeTruthy()
+  expect(within(reflection).getByText(/what small action/i)).toBeTruthy()
 })
