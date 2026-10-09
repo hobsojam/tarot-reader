@@ -9,6 +9,7 @@ const card = {
   id: 'the-fool',
   name: 'The Fool',
   uprightMeaning: 'Beginnings and trust.',
+  reversedMeaning: 'A beginning may need more preparation.',
   themes: ['beginnings'],
 }
 
