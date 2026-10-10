@@ -64,4 +64,24 @@ describe('deck explorer search', () => {
       ),
     ).toBe(true)
   })
+
+  it('returns each category in its canonical deck order', () => {
+    const expectedCategories = [
+      ['all', 78, cards],
+      ['major', 22, cards.slice(0, 22)],
+      ['wands', 14, cards.slice(22, 36)],
+      ['cups', 14, cards.slice(36, 50)],
+      ['swords', 14, cards.slice(50, 64)],
+      ['pentacles', 14, cards.slice(64, 78)],
+    ] as const
+
+    expectedCategories.forEach(([filter, count, expectedCards]) => {
+      const matchingCards = filterDeckCards(cards, '', filter)
+
+      expect(matchingCards).toHaveLength(count)
+      expect(matchingCards.map((card) => card.id)).toEqual(
+        expectedCards.map((card) => card.id),
+      )
+    })
+  })
 })

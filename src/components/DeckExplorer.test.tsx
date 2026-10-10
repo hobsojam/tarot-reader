@@ -139,6 +139,23 @@ it('clears a selected card when a search excludes it', () => {
   expect(screen.getByRole('button', { name: 'Ace of Wands' })).toBeTruthy()
 })
 
+it('does not restore a selection after a category excludes it', () => {
+  render(<DeckExplorerHarness />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'The Fool' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Wands' }))
+
+  expect(
+    screen.queryByRole('complementary', { name: /card details/i }),
+  ).toBeNull()
+
+  fireEvent.click(screen.getByRole('button', { name: 'All cards' }))
+
+  expect(
+    screen.queryByRole('complementary', { name: /card details/i }),
+  ).toBeNull()
+})
+
 it('explains when no card meaning matches the search', () => {
   render(<DeckExplorerHarness />)
 

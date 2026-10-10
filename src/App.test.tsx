@@ -42,6 +42,18 @@ it('keeps deck explorer study state when returning to setup', () => {
   ).toBeTruthy()
 })
 
+it('keeps a non-default deck category when returning to setup', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'Wands' }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /new reading/i }))
+
+  expect(
+    screen.getByRole('button', { name: 'Wands' }).getAttribute('aria-pressed'),
+  ).toBe('true')
+})
+
 it('reveals all cards and starts a fresh reading', () => {
   render(<App />)
 
