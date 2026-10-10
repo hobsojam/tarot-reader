@@ -11,6 +11,7 @@ const card = {
   uprightMeaning: 'Beginnings and trust.',
   reversedMeaning: 'A beginning may need more preparation.',
   themes: ['beginnings'],
+  arcana: 'major' as const,
 }
 
 it('renders a revealed card face with descriptive alt text', () => {

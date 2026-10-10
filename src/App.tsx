@@ -5,9 +5,12 @@ import { ReadingDetail } from './components/ReadingDetail'
 import { ReadingGuide } from './components/ReadingGuide'
 import { ReflectionAnchorCard } from './components/ReflectionAnchorCard'
 import { SpreadPicker } from './components/SpreadPicker'
+import { DeckExplorer } from './components/DeckExplorer'
+import { cards } from './data/cards'
 import { readingFocuses } from './data/reading-focuses'
 import { spreads } from './data/spreads'
 import { createDeck, deal, orientCards, shuffleDeck } from './domain/deck'
+import type { DeckExplorerFilter } from './domain/deck-explorer'
 import { synthesizeReadingNarrative } from './domain/interpretation'
 import { reversedChanceFromStartupOption } from './domain/reversals'
 import type { DealtCard } from './domain/card'
@@ -30,6 +33,12 @@ function App() {
     useState<ReadingFocusId>('general-guidance')
   const [customQuestion, setCustomQuestion] = useState('')
   const [showReflection, setShowReflection] = useState(false)
+  const [explorerSearch, setExplorerSearch] = useState('')
+  const [explorerFilter, setExplorerFilter] =
+    useState<DeckExplorerFilter>('all')
+  const [selectedExplorerCardId, setSelectedExplorerCardId] = useState<
+    string | null
+  >(null)
   const selectedSpread = spreads.find(
     (spread) => spread.id === selectedSpreadId,
   )!
@@ -161,6 +170,15 @@ function App() {
               Start reading
             </button>
           </div>
+          <DeckExplorer
+            cards={cards}
+            filter={explorerFilter}
+            onFilterChange={setExplorerFilter}
+            onSearchChange={setExplorerSearch}
+            onSelectCard={setSelectedExplorerCardId}
+            search={explorerSearch}
+            selectedCardId={selectedExplorerCardId}
+          />
         </>
       ) : (
         <>
