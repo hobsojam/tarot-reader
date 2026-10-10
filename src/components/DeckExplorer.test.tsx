@@ -1,11 +1,24 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { useState } from 'react'
-import { afterEach, expect, it } from 'vitest'
+import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import type { Card } from '../domain/card'
 import type { DeckExplorerFilter } from '../domain/deck-explorer'
 import { DeckExplorer } from './DeckExplorer'
 
-afterEach(cleanup)
+const scrollIntoView = vi.fn()
+
+beforeEach(() => {
+  Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+    configurable: true,
+    value: scrollIntoView,
+  })
+})
+
+afterEach(() => {
+  cleanup()
+  scrollIntoView.mockClear()
+  delete (HTMLElement.prototype as Partial<HTMLElement>).scrollIntoView
+})
 
 const cards: readonly Card[] = [
   {
@@ -62,6 +75,17 @@ it('shows meaning search, category controls, a result count, and cards', () => {
   expect(screen.getByRole('button', { name: 'The Fool' })).toBeTruthy()
 })
 
+it('lazy loads card faces in the result grid', () => {
+  render(<DeckExplorerHarness />)
+
+  expect(
+    screen
+      .getByRole('button', { name: 'The Fool' })
+      .querySelector('img')
+      ?.getAttribute('loading'),
+  ).toBe('lazy')
+})
+
 it('shows both orientations and themes in selected card details', () => {
   render(<DeckExplorerHarness />)
 
@@ -77,6 +101,28 @@ it('shows both orientations and themes in selected card details', () => {
     screen.getByRole('heading', { name: /reversed meaning/i }),
   ).toBeTruthy()
   expect(screen.getByText('Preparation before a beginning.')).toBeTruthy()
+})
+
+it('brings selected card details into view', () => {
+  render(<DeckExplorerHarness />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'The Fool' }))
+
+  expect(scrollIntoView).toHaveBeenCalledWith({
+    behavior: 'smooth',
+    block: 'start',
+  })
+})
+
+it('shows selected details when scrollIntoView is unavailable', () => {
+  delete (HTMLElement.prototype as Partial<HTMLElement>).scrollIntoView
+  render(<DeckExplorerHarness />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'The Fool' }))
+
+  expect(
+    screen.getByRole('complementary', { name: /card details/i }),
+  ).toBeTruthy()
 })
 
 it('clears a selected card when a search excludes it', () => {

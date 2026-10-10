@@ -99,6 +99,8 @@
   border: 1px solid var(--accent-border);
   border-radius: 0.5rem;
   padding: 1rem;
+  position: sticky;
+  top: 1rem;
 }
 
 .deck-explorer__detail > img {
@@ -264,6 +266,10 @@ button {
 
   .deck-explorer__workspace {
     grid-template-columns: 1fr;
+  }
+
+  .deck-explorer__detail {
+    position: static;
   }
 }
 

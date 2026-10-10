@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { Card } from '../domain/card'
 import {
   filterDeckCards,
@@ -35,12 +35,22 @@ export function DeckExplorer({
 }: DeckExplorerProps) {
   const visibleCards = filterDeckCards(cards, search, filter)
   const selectedCard = visibleCards.find((card) => card.id === selectedCardId)
+  const detailRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (selectedCardId && !selectedCard) {
       onSelectCard(null)
     }
   }, [onSelectCard, selectedCard, selectedCardId])
+
+  useEffect(() => {
+    if (selectedCard) {
+      detailRef.current?.scrollIntoView?.({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }, [selectedCard])
 
   return (
     <section aria-labelledby="deck-explorer-heading" className="deck-explorer">
@@ -81,6 +91,7 @@ export function DeckExplorer({
               >
                 <img
                   alt=""
+                  loading="lazy"
                   src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
                 />
                 <span>{card.name}</span>
@@ -91,7 +102,11 @@ export function DeckExplorer({
           <p>No cards match this meaning yet.</p>
         )}
         {selectedCard ? (
-          <aside aria-label="Card details" className="deck-explorer__detail">
+          <aside
+            aria-label="Card details"
+            className="deck-explorer__detail"
+            ref={detailRef}
+          >
             <img
               alt={`${selectedCard.name} tarot card`}
               src={`${import.meta.env.BASE_URL}cards/${selectedCard.id}.png`}
