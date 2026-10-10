@@ -66,4 +66,34 @@ describe('spreads', () => {
       /underlying influence|root condition/i,
     )
   })
+
+  it('designates a reflection anchor for every spread', () => {
+    expect(
+      spreads.map((spread) => ({
+        anchor: spread.reflectionAnchorPositionId,
+        positionIds: spread.positions.map((position) => position.id),
+      })),
+    ).toEqual([
+      { anchor: 'present', positionIds: ['past', 'present', 'future'] },
+      {
+        anchor: 'situation',
+        positionIds: ['situation', 'challenge', 'past', 'future', 'advice'],
+      },
+      {
+        anchor: 'present',
+        positionIds: [
+          'present',
+          'challenge',
+          'foundation',
+          'past',
+          'possible-outcome',
+          'near-future',
+          'self',
+          'environment',
+          'hopes-and-fears',
+          'outcome',
+        ],
+      },
+    ])
+  })
 })
