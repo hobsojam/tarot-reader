@@ -69,13 +69,9 @@ it('shows both orientations and themes in selected card details', () => {
 
   const details = screen.getByRole('complementary', { name: /card details/i })
   expect(details).toBeTruthy()
-  expect(
-    screen.getByRole('img', { name: /the fool tarot card/i }),
-  ).toBeTruthy()
+  expect(screen.getByRole('img', { name: /the fool tarot card/i })).toBeTruthy()
   expect(screen.getByText('openness')).toBeTruthy()
-  expect(
-    screen.getByRole('heading', { name: /upright meaning/i }),
-  ).toBeTruthy()
+  expect(screen.getByRole('heading', { name: /upright meaning/i })).toBeTruthy()
   expect(screen.getByText('Beginnings and trust.')).toBeTruthy()
   expect(
     screen.getByRole('heading', { name: /reversed meaning/i }),
@@ -104,7 +100,5 @@ it('explains when no card meaning matches the search', () => {
     target: { value: 'unfindable meaning' },
   })
 
-  expect(
-    screen.getByText('No cards match this meaning yet.'),
-  ).toBeTruthy()
+  expect(screen.getByText('No cards match this meaning yet.')).toBeTruthy()
 })

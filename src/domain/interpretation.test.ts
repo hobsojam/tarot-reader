@@ -32,6 +32,7 @@ it('selects original meaning from the dealt orientation', () => {
     uprightMeaning: 'An open path.',
     reversedMeaning: 'A pause invites reflection.',
     themes: ['reflection'],
+    arcana: 'major',
     orientation: 'upright',
   }
 
@@ -63,6 +64,7 @@ it('falls back to the card name when a card has no themes', () => {
     uprightMeaning: 'A test meaning.',
     reversedMeaning: 'A reversed test meaning.',
     themes: [],
+    arcana: 'major',
     orientation: 'upright',
   }
 

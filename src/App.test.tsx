@@ -16,6 +16,32 @@ it('renders the tarot simulator heading', () => {
   expect(screen.getByRole('heading', { name: /tarot reader/i })).toBeTruthy()
 })
 
+it('keeps deck explorer study state when returning to setup', () => {
+  render(<App />)
+
+  expect(screen.getByText('78 cards')).toBeTruthy()
+  fireEvent.change(screen.getByLabelText(/search meanings/i), {
+    target: { value: 'freer choice' },
+  })
+  fireEvent.click(screen.getByRole('button', { name: 'The Devil' }))
+
+  expect(
+    screen.getByRole('complementary', { name: /card details/i }),
+  ).toBeTruthy()
+
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /new reading/i }))
+
+  expect(
+    (screen.getByLabelText(/search meanings/i) as HTMLInputElement).value,
+  ).toBe('freer choice')
+  const details = screen.getByRole('complementary', { name: /card details/i })
+  expect(details).toBeTruthy()
+  expect(
+    within(details).getByRole('heading', { name: 'The Devil' }),
+  ).toBeTruthy()
+})
+
 it('reveals all cards and starts a fresh reading', () => {
   render(<App />)
 

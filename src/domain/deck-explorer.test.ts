@@ -22,7 +22,10 @@ describe('deck explorer search', () => {
       minorArcana.every(
         (card) =>
           card.arcana === 'minor' &&
-          ['wands', 'cups', 'swords', 'pentacles'].includes(card.suit),
+          (card.suit === 'wands' ||
+            card.suit === 'cups' ||
+            card.suit === 'swords' ||
+            card.suit === 'pentacles'),
       ),
     ).toBe(true)
   })
@@ -34,15 +37,15 @@ describe('deck explorer search', () => {
   })
 
   it('finds cards through themes, upright meanings, and reversed meanings', () => {
-    expect(filterDeckCards(cards, 'INTUITION', 'all').map((card) => card.id)).toEqual([
-      'the-high-priestess',
-    ])
+    expect(
+      filterDeckCards(cards, 'INTUITION', 'all').map((card) => card.id),
+    ).toEqual(['the-high-priestess'])
     expect(
       filterDeckCards(cards, 'forward movement', 'all').map((card) => card.id),
     ).toEqual(['the-chariot'])
-    expect(filterDeckCards(cards, 'freer choice', 'all').map((card) => card.id)).toEqual([
-      'the-devil',
-    ])
+    expect(
+      filterDeckCards(cards, 'freer choice', 'all').map((card) => card.id),
+    ).toEqual(['the-devil'])
   })
 
   it('does not use card names as meaning-search matches', () => {
