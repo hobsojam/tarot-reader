@@ -1,4 +1,4 @@
-import type { Card } from '../domain/card'
+import type { Card, Suit } from '../domain/card'
 
 const majorArcana: readonly [string, string, string][] = [
   ['the-fool', 'The Fool', 'Beginnings, openness, and trust in the journey.'],
@@ -168,32 +168,34 @@ const minorArcanaReversedTemplates: Readonly<
   King: 'Leadership in {theme} may be strongest when certainty makes room for reflection.',
 }
 
-const suits: readonly [string, string][] = [
-  ['Wands', 'energy, creativity, and purpose'],
-  ['Cups', 'feeling, connection, and imagination'],
-  ['Swords', 'thought, truth, and challenge'],
-  ['Pentacles', 'resources, work, and the material world'],
+const suits: readonly [string, Suit, string][] = [
+  ['Wands', 'wands', 'energy, creativity, and purpose'],
+  ['Cups', 'cups', 'feeling, connection, and imagination'],
+  ['Swords', 'swords', 'thought, truth, and challenge'],
+  ['Pentacles', 'pentacles', 'resources, work, and the material world'],
 ]
 
-const minorArcanaThemes: Readonly<Record<string, string>> = {
-  Wands: 'creative energy',
-  Cups: 'emotional connection',
-  Swords: 'clear thinking',
-  Pentacles: 'practical resources',
+const minorArcanaThemes: Readonly<Record<Suit, string>> = {
+  wands: 'creative energy',
+  cups: 'emotional connection',
+  swords: 'clear thinking',
+  pentacles: 'practical resources',
 }
 
 const slugify = (value: string) => value.toLowerCase().replaceAll(' ', '-')
 
-const minorArcana = suits.flatMap(([suit, theme]) =>
+const minorArcana = suits.flatMap(([suitName, suit, theme]) =>
   ranks.map((rank) => ({
-    id: `${slugify(rank)}-of-${slugify(suit)}`,
-    name: `${rank} of ${suit}`,
+    id: `${slugify(rank)}-of-${slugify(suitName)}`,
+    name: `${rank} of ${suitName}`,
     uprightMeaning: `${rank} invites reflection on ${theme}.`,
     reversedMeaning: minorArcanaReversedTemplates[rank].replaceAll(
       '{theme}',
       minorArcanaThemes[suit],
     ),
     themes: [minorArcanaThemes[suit]],
+    arcana: 'minor' as const,
+    suit,
   })),
 )
 
@@ -204,6 +206,7 @@ export const cards: readonly Card[] = [
     uprightMeaning,
     reversedMeaning: majorArcanaReversedMeanings[id],
     themes: [majorArcanaThemes[id]],
+    arcana: 'major' as const,
   })),
   ...minorArcana,
 ]
