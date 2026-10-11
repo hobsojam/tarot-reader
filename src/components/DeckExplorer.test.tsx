@@ -64,6 +64,35 @@ function DeckExplorerHarness({
   )
 }
 
+function RemountingDeckExplorerHarness() {
+  const [isExplorerVisible, setIsExplorerVisible] = useState(true)
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState<DeckExplorerFilter>('all')
+
+  return (
+    <>
+      <button
+        onClick={() => setIsExplorerVisible((isVisible) => !isVisible)}
+        type="button"
+      >
+        Toggle explorer
+      </button>
+      {isExplorerVisible ? (
+        <DeckExplorer
+          cards={cards}
+          filter={filter}
+          onFilterChange={setFilter}
+          onSearchChange={setSearch}
+          onSelectCard={setSelectedCardId}
+          search={search}
+          selectedCardId={selectedCardId}
+        />
+      ) : null}
+    </>
+  )
+}
+
 it('shows meaning search, category controls, a result count, and cards', () => {
   render(<DeckExplorerHarness />)
 
@@ -120,6 +149,16 @@ it('brings selected card details into view', () => {
   })
 })
 
+it('keeps pointer selection focus on the selected card', () => {
+  render(<DeckExplorerHarness />)
+
+  const card = screen.getByRole('button', { name: 'The Fool' })
+  card.focus()
+  fireEvent.click(card)
+
+  expect(document.activeElement).toBe(card)
+})
+
 it('moves keyboard selection focus to card details', () => {
   render(<DeckExplorerHarness />)
 
@@ -145,6 +184,20 @@ it('returns keyboard focus to the selected card from details', () => {
 
 it('does not scroll a preserved selection on initial render', () => {
   render(<DeckExplorerHarness initialSelectedCardId="the-fool" />)
+
+  expect(
+    screen.getByRole('complementary', { name: /card details/i }),
+  ).toBeTruthy()
+  expect(scrollIntoView).not.toHaveBeenCalled()
+})
+
+it('does not scroll a preserved selection when the explorer remounts', () => {
+  render(<RemountingDeckExplorerHarness />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'The Fool' }))
+  scrollIntoView.mockClear()
+  fireEvent.click(screen.getByRole('button', { name: 'Toggle explorer' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Toggle explorer' }))
 
   expect(
     screen.getByRole('complementary', { name: /card details/i }),
