@@ -40,10 +40,16 @@ const cards: readonly Card[] = [
   },
 ]
 
-function DeckExplorerHarness() {
+function DeckExplorerHarness({
+  initialSelectedCardId = null,
+}: {
+  readonly initialSelectedCardId?: string | null
+}) {
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState<DeckExplorerFilter>('all')
-  const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(
+    initialSelectedCardId,
+  )
 
   return (
     <DeckExplorer
@@ -112,6 +118,38 @@ it('brings selected card details into view', () => {
     behavior: 'smooth',
     block: 'start',
   })
+})
+
+it('moves keyboard selection focus to card details', () => {
+  render(<DeckExplorerHarness />)
+
+  const card = screen.getByRole('button', { name: 'The Fool' })
+  fireEvent.keyDown(card, { key: 'Enter' })
+  fireEvent.click(card)
+
+  expect(document.activeElement).toBe(
+    screen.getByRole('complementary', { name: /card details/i }),
+  )
+})
+
+it('returns keyboard focus to the selected card from details', () => {
+  render(<DeckExplorerHarness />)
+
+  const card = screen.getByRole('button', { name: 'The Fool' })
+  fireEvent.keyDown(card, { key: 'Enter' })
+  fireEvent.click(card)
+  fireEvent.click(screen.getByRole('button', { name: /back to deck/i }))
+
+  expect(document.activeElement).toBe(card)
+})
+
+it('does not scroll a preserved selection on initial render', () => {
+  render(<DeckExplorerHarness initialSelectedCardId="the-fool" />)
+
+  expect(
+    screen.getByRole('complementary', { name: /card details/i }),
+  ).toBeTruthy()
+  expect(scrollIntoView).not.toHaveBeenCalled()
 })
 
 it('shows selected details when scrollIntoView is unavailable', () => {
