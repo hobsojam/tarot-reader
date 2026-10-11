@@ -36,6 +36,19 @@ export function DeckExplorer({
   const visibleCards = filterDeckCards(cards, search, filter)
   const selectedCard = visibleCards.find((card) => card.id === selectedCardId)
   const detailRef = useRef<HTMLElement>(null)
+  const cardButtonRefs = useRef(new Map<string, HTMLButtonElement>())
+  const keyboardSelectionPending = useRef(false)
+  const previousSelectedCardId = useRef(selectedCardId)
+
+  const showDetails = (moveFocus: boolean) => {
+    detailRef.current?.scrollIntoView?.({
+      behavior: 'smooth',
+      block: 'start',
+    })
+    if (moveFocus) {
+      detailRef.current?.focus({ preventScroll: true })
+    }
+  }
 
   useEffect(() => {
     if (selectedCardId && !selectedCard) {
@@ -44,13 +57,23 @@ export function DeckExplorer({
   }, [onSelectCard, selectedCard, selectedCardId])
 
   useEffect(() => {
-    if (selectedCard) {
-      detailRef.current?.scrollIntoView?.({
-        behavior: 'smooth',
-        block: 'start',
-      })
+    if (selectedCard && selectedCardId !== previousSelectedCardId.current) {
+      showDetails(keyboardSelectionPending.current)
     }
-  }, [selectedCard])
+    previousSelectedCardId.current = selectedCardId
+    keyboardSelectionPending.current = false
+  }, [selectedCard, selectedCardId])
+
+  const selectCard = (cardId: string) => {
+    if (cardId === selectedCardId) {
+      if (keyboardSelectionPending.current) {
+        showDetails(true)
+        keyboardSelectionPending.current = false
+      }
+      return
+    }
+    onSelectCard(cardId)
+  }
 
   return (
     <section aria-labelledby="deck-explorer-heading" className="deck-explorer">
@@ -86,7 +109,19 @@ export function DeckExplorer({
                 aria-pressed={card.id === selectedCardId}
                 className="deck-explorer__card"
                 key={card.id}
-                onClick={() => onSelectCard(card.id)}
+                onClick={() => selectCard(card.id)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    keyboardSelectionPending.current = true
+                  }
+                }}
+                ref={(element) => {
+                  if (element) {
+                    cardButtonRefs.current.set(card.id, element)
+                  } else {
+                    cardButtonRefs.current.delete(card.id)
+                  }
+                }}
                 type="button"
               >
                 <img
@@ -106,12 +141,21 @@ export function DeckExplorer({
             aria-label="Card details"
             className="deck-explorer__detail"
             ref={detailRef}
+            tabIndex={-1}
           >
             <img
               alt={`${selectedCard.name} tarot card`}
               src={`${import.meta.env.BASE_URL}cards/${selectedCard.id}.png`}
             />
             <h3>{selectedCard.name}</h3>
+            <button
+              onClick={() =>
+                cardButtonRefs.current.get(selectedCard.id)?.focus()
+              }
+              type="button"
+            >
+              Back to deck
+            </button>
             <p>{selectedCard.themes.join(', ')}</p>
             <h4>Upright meaning</h4>
             <p>{selectedCard.uprightMeaning}</p>

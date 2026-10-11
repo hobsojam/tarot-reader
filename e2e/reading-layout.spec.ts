@@ -145,6 +145,25 @@ async function expectSpatialLayout(board: Locator, spread: SpreadCase) {
   }
 }
 
+test('moves keyboard deck selection to details and back to its card', async ({
+  page,
+}) => {
+  await page.goto('./')
+
+  const card = page.getByRole('button', { name: 'The Fool', exact: true })
+  await card.focus()
+  await page.keyboard.press('Enter')
+
+  const details = page.getByRole('complementary', {
+    name: 'Card details',
+    exact: true,
+  })
+  await expect(details).toBeFocused()
+
+  await details.getByRole('button', { name: 'Back to deck' }).click()
+  await expect(card).toBeFocused()
+})
+
 for (const spread of spreads) {
   for (const viewport of [
     { name: 'phone', width: 320, height: 900 },
