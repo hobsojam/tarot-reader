@@ -18,7 +18,7 @@ export function ReadingBoard({
   return (
     <section
       aria-label={`${spread.name} reading`}
-      className={`reading-board${spread.id === 'celtic-cross' ? ' reading-board--celtic-cross' : ''}`}
+      className={`reading-board reading-board--${spread.id}`}
     >
       {spread.positions.map((position, index) => {
         const card = cards[index]

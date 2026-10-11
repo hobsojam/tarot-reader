@@ -128,13 +128,14 @@ button {
 .reading-board {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 auto;
   max-width: 100%;
 }
 
 .reading-board--celtic-cross {
   gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   max-width: min(36rem, 100%);
 }
 
@@ -281,6 +282,19 @@ button {
 
   .reading-board {
     gap: 0.5rem;
+  }
+
+  .reading-board--five-card,
+  .reading-board--celtic-cross {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .reading-board--five-card .reading-position,
+  .reading-board--celtic-cross .reading-position {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: min(100%, 16rem);
   }
 
   .tarot-card {

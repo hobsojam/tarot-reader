@@ -12,6 +12,21 @@ import { cards } from '../data/cards'
 
 afterEach(cleanup)
 
+it.each([
+  ['Three Card', 'reading-board reading-board--three-card'],
+  ['Five Card', 'reading-board reading-board--five-card'],
+  ['Celtic Cross', 'reading-board reading-board--celtic-cross'],
+])('applies the %s board layout hook', (spreadName, expectedClass) => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: spreadName }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  expect(
+    screen.getByRole('region', { name: `${spreadName} reading` }).className,
+  ).toBe(expectedClass)
+})
+
 it('deals three face-down positions and reveals a card with keyboard activation', () => {
   render(<App />)
 
