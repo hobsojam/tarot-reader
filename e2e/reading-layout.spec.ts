@@ -170,6 +170,11 @@ for (const spread of spreads) {
           `${spread.id}-${viewport.name}.png`,
           {
             fullPage: true,
+            // GitHub's Linux system font differs slightly from the local
+            // Chromium baseline environment. Keep this below the observed
+            // 817-pixel text-rasterization drift without weakening geometry
+            // assertions above.
+            maxDiffPixels: 1_000,
           },
         )
       }
