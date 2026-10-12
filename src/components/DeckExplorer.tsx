@@ -41,8 +41,11 @@ export function DeckExplorer({
   const previousSelectedCardId = useRef(selectedCardId)
 
   const showDetails = (moveFocus: boolean) => {
+    const prefersReducedMotion = window.matchMedia?.(
+      '(prefers-reduced-motion: reduce)',
+    ).matches
     detailRef.current?.scrollIntoView?.({
-      behavior: 'smooth',
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
       block: 'start',
     })
     if (moveFocus) {

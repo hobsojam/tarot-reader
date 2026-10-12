@@ -18,6 +18,7 @@ afterEach(() => {
   cleanup()
   scrollIntoView.mockClear()
   delete (HTMLElement.prototype as Partial<HTMLElement>).scrollIntoView
+  delete (window as Partial<Window>).matchMedia
 })
 
 const cards: readonly Card[] = [
@@ -145,6 +146,21 @@ it('brings selected card details into view', () => {
 
   expect(scrollIntoView).toHaveBeenCalledWith({
     behavior: 'smooth',
+    block: 'start',
+  })
+})
+
+it('uses instant scrolling when reduced motion is preferred', () => {
+  Object.defineProperty(window, 'matchMedia', {
+    configurable: true,
+    value: vi.fn().mockReturnValue({ matches: true }),
+  })
+  render(<DeckExplorerHarness />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'The Fool' }))
+
+  expect(scrollIntoView).toHaveBeenCalledWith({
+    behavior: 'auto',
     block: 'start',
   })
 })
