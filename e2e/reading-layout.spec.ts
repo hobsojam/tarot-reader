@@ -164,6 +164,40 @@ test('moves keyboard deck selection to details and back to its card', async ({
   await expect(card).toBeFocused()
 })
 
+test('uses instant explorer scrolling when reduced motion is preferred', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.addInitScript(() => {
+    const calls: ScrollIntoViewOptions[] = []
+    Object.defineProperty(window, '__scrollIntoViewCalls', {
+      configurable: true,
+      value: calls,
+    })
+    HTMLElement.prototype.scrollIntoView = (
+      options?: ScrollIntoViewOptions,
+    ) => {
+      calls.push(options ?? {})
+    }
+  })
+  await page.goto('./')
+
+  await page.getByRole('button', { name: 'The Fool', exact: true }).click()
+
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (
+            window as Window & {
+              __scrollIntoViewCalls: ScrollIntoViewOptions[]
+            }
+          ).__scrollIntoViewCalls,
+      ),
+    )
+    .toEqual([{ behavior: 'auto', block: 'start' }])
+})
+
 for (const spread of spreads) {
   for (const viewport of [
     { name: 'phone', width: 320, height: 900 },
