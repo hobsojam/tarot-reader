@@ -68,6 +68,33 @@ it('reveals all cards and starts a fresh reading', () => {
   expect(screen.getByRole('button', { name: /start reading/i })).toBeTruthy()
 })
 
+it('selects the first reading position when revealing all without a selection', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
+
+  expect(
+    within(
+      screen.getByRole('complementary', { name: /card interpretation/i }),
+    ).getByRole('heading', { name: 'Past' }),
+  ).toBeTruthy()
+})
+
+it('preserves the selected position when revealing all', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /present: face down/i }))
+  fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
+
+  expect(
+    within(
+      screen.getByRole('complementary', { name: /card interpretation/i }),
+    ).getByRole('heading', { name: 'Present' }),
+  ).toBeTruthy()
+})
+
 it('deals reversed cards by default', () => {
   vi.spyOn(Math, 'random').mockReturnValue(0)
   render(<App />)
