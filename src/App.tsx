@@ -87,6 +87,10 @@ function App() {
             revealedPositionIds: new Set(
               selectedSpread.positions.map((position) => position.id),
             ),
+            selectedPositionId:
+              current.selectedPositionId ??
+              selectedSpread.positions[0]?.id ??
+              null,
           }
         : current,
     )
