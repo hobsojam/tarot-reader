@@ -31,10 +31,12 @@
 ### Task 1: Lock the deck-data contract with integrity tests
 
 **Files:**
+
 - Modify: `src/data/cards.test.ts` (create if absent)
 - Modify: `src/data/cards.ts`
 
 **Interfaces:**
+
 - Consumes: `cards: readonly Card[]` from `src/data/cards.ts`.
 - Produces: validated expectations for the complete authored deck.
 
@@ -68,10 +70,12 @@ git commit -m "Test distinct card data"
 ### Task 2: Make synthesis orientation-aware
 
 **Files:**
+
 - Modify: `src/domain/interpretation.ts`
 - Modify: `src/domain/interpretation.test.ts`
 
 **Interfaces:**
+
 - Consumes: `getCardMeaning(card: DealtCard): string`, `Card.themes`, and `SpreadPosition`.
 - Produces: `synthesizeInterpretation(card, position): string` and `synthesizeReadingNarrative(revealedCards, focus?): string` containing the selected orientation meaning.
 
@@ -105,10 +109,12 @@ git commit -m "Use dealt meanings in interpretations"
 ### Task 3: Author the complete distinct deck
 
 **Files:**
+
 - Modify: `src/data/cards.ts`
 - Modify: `src/data/cards.test.ts`
 
 **Interfaces:**
+
 - Consumes: the typed authored-deck contract from Task 1.
 - Produces: the final `cards: readonly Card[]` data set consumed unchanged by deck, explorer, and reading UI.
 
@@ -140,9 +146,11 @@ git commit -m "Author distinct tarot interpretations"
 ### Task 4: Verify integration and regressions
 
 **Files:**
+
 - Modify only if a regression test exposes a necessary correction in the files above.
 
 **Interfaces:**
+
 - Consumes: final deck data and orientation-aware synthesis.
 - Produces: verified application behavior without UI or asset changes.
 
@@ -161,4 +169,3 @@ Expected: every command exits 0.
 - [ ] **Step 3: Request whole-branch code review**
 
 Review for copy integrity, preservation of IDs/suits, orientation-aware semantics, and unintended UI/data-shape changes.
-
