@@ -108,6 +108,10 @@ describe('authored deck data', () => {
       for (const theme of card.themes) {
         expect(theme.trim(), card.id).not.toBe('')
       }
+      expect(
+        new Set(card.themes.map((theme) => theme.trim().toLowerCase())).size,
+        card.id,
+      ).toBeGreaterThanOrEqual(2)
     }
   })
 
