@@ -25,7 +25,7 @@ jobs:
       - run: npm run test:e2e -- --reporter=dot,html
       - name: Upload browser test artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: playwright-results
           path: |
