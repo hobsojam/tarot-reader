@@ -2,6 +2,7 @@ import { cards } from '../data/cards'
 import { spreads } from '../data/spreads'
 import { expect, it } from 'vitest'
 import type { DealtCard } from './card'
+import type { SpreadPosition } from './spread'
 import {
   getCardMeaning,
   synthesizeInterpretation,
@@ -15,6 +16,25 @@ const self = celticCross.positions.find((position) => position.id === 'self')!
 const foundation = celticCross.positions.find(
   (position) => position.id === 'foundation',
 )!
+const testCard: DealtCard = {
+  id: 'test-card',
+  name: 'Test Card',
+  uprightMeaning: 'An open path.',
+  reversedMeaning: 'A pause invites reflection.',
+  themes: ['reflection'],
+  arcana: 'major',
+  orientation: 'upright',
+}
+const present: SpreadPosition = {
+  id: 'present',
+  label: 'Present',
+  row: 1,
+  column: 1,
+  readingOrder: 1,
+  prompt: 'What is active now?',
+  lens: 'Present energy',
+  synthesisTemplate: 'Notice how {theme} is active now.',
+}
 
 it('synthesizes distinct Self and Foundation readings from a card theme', () => {
   const selfReading = synthesizeInterpretation(dealtEmpress, self)
@@ -71,13 +91,73 @@ it('falls back to the card name when a card has no themes', () => {
   expect(synthesizeInterpretation(card, self)).toContain('Test Card')
 })
 
-it('accepts a reversed dealt card while upright-only synthesis is in effect', () => {
+it('begins contextual interpretations with the dealt orientation meaning', () => {
+  const upright = synthesizeInterpretation(testCard, present)
+  const reversed = synthesizeInterpretation(
+    { ...testCard, orientation: 'reversed' },
+    present,
+  )
+
+  expect(upright).toMatch(/^An open path\./)
+  expect(reversed).toMatch(/^A pause invites reflection\./)
+  expect(upright).not.toContain('A pause invites reflection.')
+  expect(reversed).not.toContain('An open path.')
+  expect(upright).toContain('Notice how reflection is active now.')
+  expect(reversed).toContain('Notice how reflection is active now.')
+  expect(reversed).not.toBe(upright)
+})
+
+it('includes the dealt orientation meaning in the reading narrative', () => {
+  const upright = synthesizeReadingNarrative([
+    { card: testCard, position: present },
+  ])
+  const reversed = synthesizeReadingNarrative([
+    { card: { ...testCard, orientation: 'reversed' }, position: present },
+  ])
+
+  expect(upright).toContain('An open path.')
+  expect(reversed).toContain('A pause invites reflection.')
+  expect(upright).not.toContain('A pause invites reflection.')
+  expect(reversed).not.toContain('An open path.')
+  expect(upright).toContain('At Present')
+  expect(reversed).toContain('At Present')
+  expect(upright).toContain('lens of present energy')
+  expect(reversed).toContain('lens of present energy')
+  expect(reversed).toContain('appears reversed')
+  expect(reversed).not.toBe(upright)
+})
+
+it('gives two Wands cards distinct interpretations at the same position', () => {
+  const ace: DealtCard = {
+    ...cards.find((card) => card.id === 'ace-of-wands')!,
+    orientation: 'upright',
+  }
+  const two: DealtCard = {
+    ...cards.find((card) => card.id === 'two-of-wands')!,
+    orientation: 'upright',
+  }
+
+  expect(synthesizeInterpretation(ace, present)).not.toBe(
+    synthesizeInterpretation(two, present),
+  )
   expect(
-    synthesizeInterpretation(
-      { ...dealtEmpress, orientation: 'reversed' },
-      self,
-    ),
-  ).toBe(synthesizeInterpretation(dealtEmpress, self))
+    synthesizeReadingNarrative([{ card: ace, position: present }]),
+  ).toContain(ace.uprightMeaning)
+  expect(
+    synthesizeReadingNarrative([{ card: two, position: present }]),
+  ).toContain(two.uprightMeaning)
+})
+
+it('frames a non-empty narrative with the reading focus', () => {
+  const narrative = synthesizeReadingNarrative(
+    [{ card: testCard, position: present }],
+    'a creative project',
+  )
+
+  expect(narrative).toMatch(
+    /^Consider this reading through the lens of a creative project\./,
+  )
+  expect(synthesizeReadingNarrative([], 'a creative project')).toBe('')
 })
 
 it('frames the Near Future as a possibility rather than a certainty', () => {

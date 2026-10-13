@@ -18,7 +18,7 @@ export function synthesizeInterpretation(
 ): string {
   const theme = card.themes[0] ?? card.name
 
-  return position.synthesisTemplate.replaceAll('{theme}', theme)
+  return `${getCardMeaning(card)} ${position.synthesisTemplate.replaceAll('{theme}', theme)}`
 }
 
 export function synthesizeReadingNarrative(
@@ -32,10 +32,11 @@ export function synthesizeReadingNarrative(
     .map(({ card, position }) => {
       const theme = card.themes[0] ?? card.name
       const lens = position.lens.toLowerCase()
+      const meaning = getCardMeaning(card)
 
       return card.orientation === 'reversed'
-        ? `At ${position.label}, ${card.name} appears reversed, inviting reflection on ${theme} through the lens of ${lens}.`
-        : `At ${position.label}, ${card.name} brings ${theme} into focus through the lens of ${lens}.`
+        ? `At ${position.label}, ${card.name} appears reversed, inviting reflection on ${theme} through the lens of ${lens}. ${meaning}`
+        : `At ${position.label}, ${card.name} brings ${theme} into focus through the lens of ${lens}. ${meaning}`
     })
     .join(' ')
 
