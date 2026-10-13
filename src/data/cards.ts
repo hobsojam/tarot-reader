@@ -1,6 +1,8 @@
 import type { Card } from '../domain/card'
 
 // Original project interpretation copy, licensed under MIT.
+// Entries deliberately share a consistent record shape: this is curated deck
+// content, not repeated application logic, so it is excluded from duplication analysis.
 export const cards: readonly Card[] = [
   {
     id: 'the-fool',
