@@ -295,7 +295,6 @@ for (const spread of spreads) {
             // Chromium baseline environment. The serif fallback also changes
             // some wrapped lines by one pixel, so allow its observed 9% page
             // diff without weakening the geometry assertions above.
-            maxDiffPixels: 1_000,
             maxDiffPixelRatio: 0.1,
           },
         )
