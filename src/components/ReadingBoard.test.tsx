@@ -148,3 +148,18 @@ it('adds a progressive narrative after a card is revealed', () => {
     ),
   ).toBeTruthy()
 })
+
+it('labels board positions without adding page headings', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  const board = screen.getByRole('region', { name: 'Celtic Cross reading' })
+  expect(within(board).queryAllByRole('heading')).toHaveLength(0)
+  expect(within(board).getAllByRole('button')).toHaveLength(10)
+  expect(
+    within(board).getByRole('button', { name: 'Hopes and Fears: face down' }),
+  ).toBeTruthy()
+  expect(within(board).getByText('Hopes and Fears')).toBeTruthy()
+})

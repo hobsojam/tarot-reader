@@ -171,12 +171,17 @@ button {
   min-width: 0;
 }
 
-.reading-position h2,
+.reading-position__label,
 .reading-detail h2 {
   font-size: 1rem;
 }
 
-.reading-position h2 {
+.reading-position__label {
+  color: var(--text-h);
+  font-family: var(--heading);
+  font-weight: 500;
+  letter-spacing: -0.24px;
+  line-height: 118%;
   margin: 0 0 0.25rem;
 }
 

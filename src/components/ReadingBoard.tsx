@@ -31,7 +31,9 @@ export function ReadingBoard({
             key={position.id}
             style={{ gridColumn: position.column, gridRow: position.row }}
           >
-            <h2>{position.label}</h2>
+            <p aria-hidden="true" className="reading-position__label">
+              {position.label}
+            </p>
             <TarotCard
               card={card}
               label={position.label}
