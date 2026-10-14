@@ -130,7 +130,7 @@ function App() {
               </label>
             ) : null}
             <button onClick={handleStartReading} type="button">
-              Start reading
+              Begin reading
             </button>
           </div>
           <DeckExplorer
@@ -145,6 +145,11 @@ function App() {
         </>
       ) : (
         <>
+          <p className="reading-journey__cue">
+            {readingComplete
+              ? 'All cards revealed — take a moment to reflect on the thread that has emerged.'
+              : 'Reveal a card to continue, in whichever order feels useful.'}
+          </p>
           <div className="reading-actions">
             <button onClick={handleRevealAll} type="button">
               Reveal all

@@ -30,11 +30,13 @@
 ### Task 1: Adopt distinct, original card interpretations
 
 **Files:**
+
 - Modify: `src/data/cards.ts`
 - Create: `src/data/cards.test.ts`
 - Modify: `src/domain/interpretation.test.ts`
 
 **Interfaces:**
+
 - Produces: `cards: readonly Card[]` with 78 stable identities, unique upright and reversed meanings, and 2–3 unique themes per card.
 - Consumes: `getCardMeaning`, `synthesizeInterpretation`, and `synthesizeReadingNarrative` without changing their public signatures.
 
@@ -72,6 +74,7 @@
 ### Task 2: Make the active reading a captured domain session
 
 **Files:**
+
 - Modify: `src/domain/deck.ts`
 - Modify: `src/domain/deck.test.ts`
 - Create: `src/domain/reading-session.ts`
@@ -80,6 +83,7 @@
 - Modify: `src/App.test.tsx`
 
 **Interfaces:**
+
 - Produces: `startReading(options)`, `revealPosition(session, id)`, `revealAll(session)`, `getSelectedReadingCard(session)`, `getRevealedReadingCards(session)`, `isReadingComplete(session)`, `getReflectionAnchor(session)`, and `getNarrativeFraming(session)`.
 - Consumes: `Card[]`, `Spread`, `ReadingFocus`, and deck primitives; `createDeck(cardsToCopy)` no longer imports application data.
 
@@ -121,12 +125,14 @@
 ### Task 3: Make Explorer selection explicit and robust
 
 **Files:**
+
 - Modify: `src/components/DeckExplorer.tsx`
 - Modify: `src/components/DeckExplorer.test.tsx`
 - Modify: `e2e/reading-layout.spec.ts`
 - Modify: `docs/superpowers/specs/2026-10-12-code-review-backlog.md`
 
 **Interfaces:**
+
 - Consumes: controlled `search`, `filter`, and `selectedCardId` props.
 - Produces: no selection-repair effect or keydown-pending ref; keyboard selection focuses the detail and pointer selection preserves card focus.
 
@@ -168,6 +174,7 @@
 ### Task 4: Deliver the quiet-occult guided journey
 
 **Files:**
+
 - Modify: `src/index.css`
 - Modify: `src/App.css`
 - Modify: `src/App.tsx`
@@ -177,6 +184,7 @@
 - Modify: `e2e/reading-layout.spec.ts`
 
 **Interfaces:**
+
 - Produces: semantic quiet-occult design tokens and accessible state cues for setup, partial reading, completion, and reflection.
 - Consumes: `ReadingSession` derivations from Task 2 and existing responsive/card-image styling.
 
@@ -218,11 +226,13 @@
 ### Task 5: Reconcile the backlog and validate the integrated branch
 
 **Files:**
+
 - Modify: `docs/superpowers/specs/2026-10-11-polish-and-remediation-backlog.md`
 - Modify: `docs/superpowers/specs/2026-10-12-code-review-backlog.md`
 - Modify: `README.md` only if reader-facing interaction copy changes require explanation.
 
 **Interfaces:**
+
 - Produces: backlog documents that accurately distinguish completed work from future opportunities.
 
 - [ ] **Step 1: Update completion status**

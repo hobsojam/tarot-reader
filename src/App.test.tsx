@@ -16,6 +16,18 @@ it('renders the tarot simulator heading', () => {
   expect(screen.getByRole('heading', { name: /tarot reader/i })).toBeTruthy()
 })
 
+it('guides the reader through setup, reveal, and reflection', () => {
+  render(<App />)
+
+  expect(screen.getByRole('button', { name: /begin reading/i })).toBeTruthy()
+
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
+  expect(screen.getByText(/reveal a card to continue/i)).toBeTruthy()
+
+  fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
+  expect(screen.getByText(/all cards revealed.*reflect/i)).toBeTruthy()
+})
+
 it('keeps deck explorer study state when returning to setup', () => {
   render(<App />)
 
@@ -29,7 +41,7 @@ it('keeps deck explorer study state when returning to setup', () => {
     screen.getByRole('complementary', { name: /card details/i }),
   ).toBeTruthy()
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /new reading/i }))
 
   expect(
@@ -46,7 +58,7 @@ it('keeps a non-default deck category when returning to setup', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('button', { name: 'Wands' }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /new reading/i }))
 
   expect(
@@ -57,7 +69,7 @@ it('keeps a non-default deck category when returning to setup', () => {
 it('reveals all cards and starts a fresh reading', () => {
   render(<App />)
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
 
   expect(screen.getAllByRole('button', { name: /revealed/i })).toHaveLength(3)
@@ -65,13 +77,13 @@ it('reveals all cards and starts a fresh reading', () => {
   fireEvent.click(screen.getByRole('button', { name: /new reading/i }))
 
   expect(screen.queryByRole('button', { name: /revealed/i })).toBeNull()
-  expect(screen.getByRole('button', { name: /start reading/i })).toBeTruthy()
+  expect(screen.getByRole('button', { name: /begin reading/i })).toBeTruthy()
 })
 
 it('selects the first reading position when revealing all without a selection', () => {
   render(<App />)
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
 
   expect(
@@ -84,7 +96,7 @@ it('selects the first reading position when revealing all without a selection', 
 it('preserves the selected position when revealing all', () => {
   render(<App />)
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /present: face down/i }))
   fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
 
@@ -99,7 +111,7 @@ it('deals reversed cards by default', () => {
   vi.spyOn(Math, 'random').mockReturnValue(0)
   render(<App />)
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   fireEvent.click(screen.getByRole('button', { name: /past: face down/i }))
 
   expect(
@@ -129,7 +141,7 @@ it('uses the selected focus in the active reading narrative', () => {
   fireEvent.change(screen.getByLabelText(/reading focus/i), {
     target: { value: 'relationships' },
   })
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   expect(screen.getByText('Focus: Relationships')).toBeTruthy()
 
@@ -144,7 +156,7 @@ it('renders the active reading with its selected spread', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: 'Celtic Cross' }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   expect(
     screen.getByRole('region', { name: 'Celtic Cross workspace' }),
@@ -155,7 +167,7 @@ it('renders the active reading with its selected spread', () => {
 it('opens reflection prompts only after every card is revealed', () => {
   render(<App />)
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   expect(
     screen.queryByRole('button', { name: /reflect on this reading/i }),
   ).toBeNull()

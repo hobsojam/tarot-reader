@@ -78,12 +78,12 @@ expectations; color is never the sole carrier of state.
 
 The app has four states with one clear contextual cue:
 
-| State | Primary cue/action |
-| --- | --- |
-| Setup | "Begin reading" starts the selected spread. Explorer browsing remains optional below setup. |
-| Partial reading | State text invites the reader to reveal a card; each unrevealed card remains independently selectable. |
-| Complete reading | State text invites reflection; the reflection control becomes available while New reading remains secondary. |
-| Reflection | The reflection section presents a distinct closing prompt and anchor card, not a duplicate of Reading so far. |
+| State            | Primary cue/action                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| Setup            | "Begin reading" starts the selected spread. Explorer browsing remains optional below setup.                   |
+| Partial reading  | State text invites the reader to reveal a card; each unrevealed card remains independently selectable.        |
+| Complete reading | State text invites reflection; the reflection control becomes available while New reading remains secondary.  |
+| Reflection       | The reflection section presents a distinct closing prompt and anchor card, not a duplicate of Reading so far. |
 
 Do not add a wizard, a required card order, a persistent dashboard/side rail,
 or decorative motion. Existing responsive layouts, semantic headings, native
@@ -118,5 +118,5 @@ buttons, visible focus, and reduced-motion protections remain intact.
   reduced motion, and a guided reading through completion on phone and desktop
   viewports.
 - Run `npm run lint`, `npm run format:check`, `npm run images:check`, `npm
-  test`, `npm run build`, `npm run test:e2e`, and `git diff --check` before
+test`, `npm run build`, `npm run test:e2e`, and `git diff --check` before
   requesting review.
