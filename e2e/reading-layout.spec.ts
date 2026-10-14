@@ -146,6 +146,24 @@ async function expectSpatialLayout(board: Locator, spread: SpreadCase) {
   }
 }
 
+for (const key of ['Enter', 'Space']) {
+  test(`reveals a face-down reading card with ${key}`, async ({ page }) => {
+    const board = await startReading(page, spreads[0])
+
+    await board
+      .getByRole('button', { name: 'Past: face down', exact: true })
+      .focus()
+    await page.keyboard.press(key)
+
+    await expect(
+      board.getByRole('button', { name: /^Past: .+ revealed$/ }),
+    ).toBeFocused()
+    await expect(board.getByRole('button', { name: /face down$/ })).toHaveCount(
+      2,
+    )
+  })
+}
+
 test('moves keyboard deck selection to details and back to its card', async ({
   page,
 }) => {
