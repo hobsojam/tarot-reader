@@ -77,6 +77,8 @@ async function sha256(path: string): Promise<string> {
     .digest('hex')
 }
 
+// sharp converts each master from its embedded ICC profile to sRGB and drops
+// the profile on output; ATTRIBUTION.md records this.
 function resized(masterPath: string, width: number) {
   return sharp(masterPath).removeAlpha().resize({ width })
 }

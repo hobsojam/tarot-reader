@@ -29,7 +29,9 @@ The modern vector tracing of the same design on Commons is not used.
 The files the app serves are derived from those masters by `npm run images`:
 `public/cards/<id>-280.webp` and `public/cards/<id>-420.webp` for each face,
 and `public/card-back-420.webp` for the back. Each is the master resized to
-that width and encoded as WebP, with no other edits.
+that width, converted from the master's embedded colour profile to sRGB (which
+looks the same in colour-managed browsers), and encoded as WebP without an
+embedded profile. No other edits are made.
 
 ## Original project material
 
