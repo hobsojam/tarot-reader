@@ -1,0 +1,1027 @@
+{
+  "back": {
+    "sha256": "214460232be51586d81c1e4e54c21acb2d0c379b4469f9f147f3b13a864d7e43",
+    "variants": {
+      "420": {
+        "width": 420,
+        "height": 725
+      }
+    }
+  },
+  "cards": {
+    "ace-of-cups": {
+      "sha256": "d943f6aa4d1aa04369ab847edea16366de36abe273d944a736291cf505249b65",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "ace-of-pentacles": {
+      "sha256": "521bbfc774f4db5b95462c7293ca8d4a8f8d22f11e290acad451f7aabbc715f3",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "ace-of-swords": {
+      "sha256": "2dd638056c7f24ade3b98566be88701ef24bbdcffaaf55a8e9294f350c1d2591",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "ace-of-wands": {
+      "sha256": "76423902a32347cd7af1c605aa88b5fc2d148947051aa91e869b228ced02e8aa",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 487
+        },
+        "420": {
+          "width": 420,
+          "height": 730
+        }
+      }
+    },
+    "death": {
+      "sha256": "4204e29e9f1acea3062c31c1a83b2ba74e220cd587be9226ef65433cfba9bb1f",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "eight-of-cups": {
+      "sha256": "3fe4319b76353a1a077d5b57c198c39b6d9446f2c82d32b3f125d018d928783c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "eight-of-pentacles": {
+      "sha256": "f51bc9fb5bc0f58c2d3b34bd80efaa5762c34ed44c89d809f21e387eef3ae4df",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "eight-of-swords": {
+      "sha256": "bf2631787762a4c73217eeefdd8330bff20a072867518f607df17bd812833015",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "eight-of-wands": {
+      "sha256": "77a907346d51335b98add92bce431ca2b31f9f4b4553e29ef9c1b1ddfb926189",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "five-of-cups": {
+      "sha256": "9b9d2376c8762011ce0b5cb3cdc36f03ecd5f8ba4fc3d2055f7454c20582a800",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 480
+        },
+        "420": {
+          "width": 420,
+          "height": 720
+        }
+      }
+    },
+    "five-of-pentacles": {
+      "sha256": "671722d4e54fe16f111281f290d1836324d978a1de2798374252f1d04f9c2b54",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "five-of-swords": {
+      "sha256": "920df2fd33d4d43ca34132462f95db659f0a6fe529f07af581c1791352345eed",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "five-of-wands": {
+      "sha256": "7bf2fd2730a2351a2459f09042c6a12100398fbdbf6ce556ab96e342f09c2afe",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "four-of-cups": {
+      "sha256": "6a401a3bdd43175854cfb4d739df6e0659cb62edcffb1ada1a94fcd5aa74f6db",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "four-of-pentacles": {
+      "sha256": "2cb105a6a6ad9e00695048bf6c287560b64bd9d03759ff7d506518e50c9505ac",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "four-of-swords": {
+      "sha256": "f3733ab02c91e17fe83365efbb1135ac59bdba94817b32b6ebf169bb3f63f322",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "four-of-wands": {
+      "sha256": "747fac70502160907f198d360b1cfe0e48b626f9d2db32486de485fe75f8330c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "judgement": {
+      "sha256": "388bd85d3848f0134a0205619f8ab4d045abccb6e0ce08d38a10032f37ef3ad0",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "justice": {
+      "sha256": "7adf59afd31328eb42bc9b46117a46ddcc2bdf915b53c96fba4f3cfbc769396a",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "king-of-cups": {
+      "sha256": "a308d6d3aca7643f42cb4747f238930d6da821074f036ac60fc74b6181c98fbe",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 480
+        },
+        "420": {
+          "width": 420,
+          "height": 720
+        }
+      }
+    },
+    "king-of-pentacles": {
+      "sha256": "a53bf1a8dcd4a8cea16a90d5547d2a0b6f4e27ae3ca6464f25ae1e97c9fe8377",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "king-of-swords": {
+      "sha256": "ee8bbf828872cbb997ac9739006e8aab8d7e389032d6ab1adedaac1c102907f8",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "king-of-wands": {
+      "sha256": "d7481bb13525e362cfafed27644cd44ae88e5d5f76b180ba2ed35a7529fd1daf",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 487
+        },
+        "420": {
+          "width": 420,
+          "height": 730
+        }
+      }
+    },
+    "knight-of-cups": {
+      "sha256": "78f283ef9cc42c6891bcf0eae746ccba4ecc14ba47aa9c275c6422bbd09ff847",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "knight-of-pentacles": {
+      "sha256": "fe17504d8db519f0b390af2fbc5366829fce5f6251201fdd087b4840305e5865",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "knight-of-swords": {
+      "sha256": "b229c3d8bab23f457bfa91d7ae206af1705ee164d8836562407ce0645ede1032",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "knight-of-wands": {
+      "sha256": "c3cf8ce6d929b13dd4fe91abfe3c5167393f8fe522647dfd23d783de78062fb7",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "nine-of-cups": {
+      "sha256": "94d51add5a420418dacc202bb07c0f2e502086c5f9c1a238f39fb6f4b027e3ca",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "nine-of-pentacles": {
+      "sha256": "0b2a945b704d698e920cdd52b278ceac60eb1c9f1a9ffb66a76cc06471537292",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "nine-of-swords": {
+      "sha256": "23f6387b44893cde4263cd88ebcd48eb44a12a8780ff4e1eebe4b7b07d018758",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "nine-of-wands": {
+      "sha256": "7e7ecb7a877455a053c964e14cddf9e36ad57fc2a311e364062302b8664730e5",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "page-of-cups": {
+      "sha256": "6a3fc0d508250f0806b91b02ecdf2de80bf6d9dd3da8e8b0f178c9d8cb6ca4f9",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "page-of-pentacles": {
+      "sha256": "b88e35ab89d2ab7da7c4d3ff6b687cc54f1c63f935272a7ba831057555a7e27a",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "page-of-swords": {
+      "sha256": "53e098fe940375459b930496cf5782f0805cb17f6e390d9f821b61de14326163",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "page-of-wands": {
+      "sha256": "a97042be01e253de08ef3f2c349eb5480f98a14c2e4a42bf45e4cb558b222497",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "queen-of-cups": {
+      "sha256": "402bc12d84d1618599157c304f685dfd9265b37552cafb576cd55a5985f7299f",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "queen-of-pentacles": {
+      "sha256": "326a66c96d7b0f08fee60fdd3817a7ab7251f316e44949339f3ca395bd5e2ffe",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "queen-of-swords": {
+      "sha256": "d0ed3ab7245ce5af75ab7c224b1f13e5b5de9e07ee30bf49ace6592bc102122c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 487
+        },
+        "420": {
+          "width": 420,
+          "height": 730
+        }
+      }
+    },
+    "queen-of-wands": {
+      "sha256": "b021f821d0422cbe093466abcce459b19714cda3393104ef280d809c68da1ef9",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "seven-of-cups": {
+      "sha256": "2754ded7832797bb9266353fe11233ee5b92fc915b94d8b618985ea9b66648e9",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "seven-of-pentacles": {
+      "sha256": "7e69f40d349c5d89112258142fb8fd3e5b70aa7683f229cf60c16e6a41b2a7a1",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "seven-of-swords": {
+      "sha256": "24044b7c09cd432a45b47e88976e3e03090a5ac3307686f175eec7da4bb0a466",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "seven-of-wands": {
+      "sha256": "5e9dbd2ae4da0e1cfbbd2e976d0451ec7be3dfcfd2cef59e72e18a6727f7b88f",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "six-of-cups": {
+      "sha256": "0c00103d6558bec06319c1ccc4ecf1f56cd231fa8a0738ce8c0d91171dec7c2c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "six-of-pentacles": {
+      "sha256": "4b51041476b90efeb3b9720191845f2a71a68eb5182dba36f16e25ca503242b3",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "six-of-swords": {
+      "sha256": "8d0ba7f8e65f74d2a058470302b0dabfde2f5252d17dcc636d692798e86b3de0",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "six-of-wands": {
+      "sha256": "7fd5dbb93a83c6dcefb0947b788e19fdd02c2b77b6b7c3961a0419c0e5e5108c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "strength": {
+      "sha256": "1aa0c3c311a884e0405bc828dc91aef3c77c982e2d3bf6d72dc16ce52dffd952",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "temperance": {
+      "sha256": "635674a13c3da4cfab8f1347823fba5e7e60fea3cc0d9c4de8235b709a41fbb1",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 487
+        },
+        "420": {
+          "width": 420,
+          "height": 730
+        }
+      }
+    },
+    "ten-of-cups": {
+      "sha256": "c15ba4f3f6fa28bc582be0ac3777b2804e3744e1f2d0de5d662a197b5202f06d",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "ten-of-pentacles": {
+      "sha256": "3a768d727b2c4ef56d7e46353ab7848d19bda9701e851cc84b4ae096c2086041",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "ten-of-swords": {
+      "sha256": "12cbf1b358a5c34ddcca9a28dd7a540500e6cdc3652f0c8e1af38cd337a7665a",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "ten-of-wands": {
+      "sha256": "ee0abda9bbac70a4e4232a40a4ccdd30e00aa8a30ff5b12f880f7490367745cc",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 488
+        },
+        "420": {
+          "width": 420,
+          "height": 732
+        }
+      }
+    },
+    "the-chariot": {
+      "sha256": "d071c2588db23baf024701e6e15ab572f7ff7648914ee376f86b5b42acf61f2d",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "the-devil": {
+      "sha256": "2991236656da6b67b0e8eb792a3d3267dbe9a43ade968a9e1f970ac4ec51448e",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 493
+        },
+        "420": {
+          "width": 420,
+          "height": 740
+        }
+      }
+    },
+    "the-emperor": {
+      "sha256": "8771925cad14a6c6fad80666517bbe172b84fe57c6b1ae3327f0235698340977",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "the-empress": {
+      "sha256": "a0624063bdda624e1901ce6535f03d423f03742ec57026cc762518faba88df65",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 479
+        },
+        "420": {
+          "width": 420,
+          "height": 718
+        }
+      }
+    },
+    "the-fool": {
+      "sha256": "94071225724666d107f7e05f08241e7999478fdd9e25569cd262b927b8866643",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 469
+        },
+        "420": {
+          "width": 420,
+          "height": 704
+        }
+      }
+    },
+    "the-hanged-man": {
+      "sha256": "0df66b1ea2c0fa9964982cd76d144aa36bee62ab9bddfe5c3a354ec1998dee2c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 492
+        },
+        "420": {
+          "width": 420,
+          "height": 738
+        }
+      }
+    },
+    "the-hermit": {
+      "sha256": "3c85fb2aab127508e24d226d86d439735306955207217929337b1b17ec5c40da",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 479
+        },
+        "420": {
+          "width": 420,
+          "height": 718
+        }
+      }
+    },
+    "the-hierophant": {
+      "sha256": "39e98fbad89813ba7dd1f62592a18c4162c5e4508c2599bdeb0fc498d8efd73f",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "the-high-priestess": {
+      "sha256": "25d6ec1e82308fcb8b1bd1c3ad3091e4de0ffcd17d50981495655fb84ab3ea09",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "the-lovers": {
+      "sha256": "4c8de5f26a202bc8640993658ef468b7adc60e0bca25c43cf1bf8fbde7c7940c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 479
+        },
+        "420": {
+          "width": 420,
+          "height": 718
+        }
+      }
+    },
+    "the-magician": {
+      "sha256": "60aacd34bcef6cdba67e9bd89aca9876f25fa69233b81b286b21b383389a1c21",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "the-moon": {
+      "sha256": "15dec23fb824b509a51ce43fd39584cdd58ed1ce299bac7ca6de10b47985177d",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "the-star": {
+      "sha256": "b064935aa09ba03787c62c931f9f7c47780fef4f86bf2b9eaacbc7f1b640428b",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "the-sun": {
+      "sha256": "4c39019b364fecf899a79ea11d7d1147cab118da928db9bff8173215280f7633",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "the-tower": {
+      "sha256": "47c2c075dc603bda61adc9a97c1510a3d44cf6d93d9f8bf1da197758da9e8264",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "the-world": {
+      "sha256": "78ec3c015419655a87d923fb278688b4c52c00f39346b5661c455b23926b13aa",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "three-of-cups": {
+      "sha256": "8cd900a20b9455940800da857a74c317e8fbceafc9e1a06c30648a084b8076d5",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "three-of-pentacles": {
+      "sha256": "89e6ac8be493f98b2ca91bf4de2840ead5abd7184151c91dc34ea1a5d365c4c0",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 481
+        },
+        "420": {
+          "width": 420,
+          "height": 722
+        }
+      }
+    },
+    "three-of-swords": {
+      "sha256": "3ffbb520ee3bab8897c7e44868c5929b1638951fdd5a50107c7e9104a748f99c",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 488
+        },
+        "420": {
+          "width": 420,
+          "height": 732
+        }
+      }
+    },
+    "three-of-wands": {
+      "sha256": "ebe5ea20dd439c326f72bbbadb3f4793acc3c0eab0878c509b9290d00a909690",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 488
+        },
+        "420": {
+          "width": 420,
+          "height": 732
+        }
+      }
+    },
+    "two-of-cups": {
+      "sha256": "9d2dcf7e081515217e14f0e508c533d67a70b83d834d2d5f623085bfe4405f37",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 485
+        },
+        "420": {
+          "width": 420,
+          "height": 728
+        }
+      }
+    },
+    "two-of-pentacles": {
+      "sha256": "0118adbd6fb69117bec989e2a60653b7ae91c29bb861e894b44cf492b1363988",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 484
+        },
+        "420": {
+          "width": 420,
+          "height": 726
+        }
+      }
+    },
+    "two-of-swords": {
+      "sha256": "a9219ade1e6e3609b55c64b25c714a663581764264c913917c2234b1f4ce76ec",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 480
+        },
+        "420": {
+          "width": 420,
+          "height": 720
+        }
+      }
+    },
+    "two-of-wands": {
+      "sha256": "6b827311c9607de074991ffe178e771aab4ad1e6be1e16095471f0e42494dd36",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 483
+        },
+        "420": {
+          "width": 420,
+          "height": 724
+        }
+      }
+    },
+    "wheel-of-fortune": {
+      "sha256": "016c0b4003b9f8864a2d6799e157755befb6f52caf2ac1ae0eff392a06fe31fb",
+      "variants": {
+        "280": {
+          "width": 280,
+          "height": 487
+        },
+        "420": {
+          "width": 420,
+          "height": 730
+        }
+      }
+    }
+  }
+}

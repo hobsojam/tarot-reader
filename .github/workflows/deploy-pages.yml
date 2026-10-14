@@ -30,6 +30,7 @@ jobs:
       - run: ./node_modules/.bin/playwright install --with-deps chromium
       - run: npm run lint
       - run: npm run format:check
+      - run: npm run images:check
       - run: npm test
       - run: npm run build
       - run: npm run test:e2e -- --reporter=dot,html

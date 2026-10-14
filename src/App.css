@@ -1,7 +1,9 @@
 .app-shell {
+  box-sizing: border-box;
   margin: 0 auto;
   max-width: 70rem;
   padding: 2rem 1.5rem;
+  width: 100%;
 }
 
 .spread-picker,
@@ -92,6 +94,7 @@
 .deck-explorer__card img {
   aspect-ratio: 21 / 37;
   display: block;
+  height: auto;
   object-fit: contain;
   width: 100%;
 }
@@ -107,6 +110,7 @@
 .deck-explorer__detail > img {
   aspect-ratio: 21 / 37;
   display: block;
+  height: auto;
   margin: 0 auto 1rem;
   object-fit: contain;
   width: min(100%, 16rem);
@@ -131,6 +135,8 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0 auto;
   max-width: 100%;
+  /* A definite width keeps the board from resizing as card images load. */
+  width: 100%;
 }
 
 .reading-board--celtic-cross {
@@ -253,6 +259,7 @@ button {
 .reflection-anchor__image {
   aspect-ratio: 21 / 37;
   display: block;
+  height: auto;
   margin: 1rem auto;
   object-fit: contain;
   width: min(12rem, 100%);

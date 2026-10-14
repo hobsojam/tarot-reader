@@ -122,6 +122,33 @@ it('lazy loads card faces in the result grid', () => {
   ).toBe('lazy')
 })
 
+it('requests compact thumbnails in the result grid', () => {
+  render(<DeckExplorerHarness />)
+
+  const thumbnail = screen
+    .getByRole('button', { name: 'The Fool' })
+    .querySelector('img')
+  expect(thumbnail?.getAttribute('src')).toBe('/cards/the-fool-280.webp')
+  expect(thumbnail?.getAttribute('srcset')).toBe(
+    '/cards/the-fool-280.webp 280w, /cards/the-fool-420.webp 420w',
+  )
+  expect(thumbnail?.getAttribute('sizes')).toBe('8rem')
+  expect(thumbnail?.getAttribute('width')).toBe('280')
+  expect(thumbnail?.getAttribute('height')).toBe('469')
+})
+
+it('shows the full-size face in selected card details', () => {
+  render(<DeckExplorerHarness />)
+
+  fireEvent.click(screen.getByRole('button', { name: 'The Fool' }))
+
+  const face = screen.getByRole('img', { name: /the fool tarot card/i })
+  expect(face.getAttribute('src')).toBe('/cards/the-fool-420.webp')
+  expect(face.hasAttribute('srcset')).toBe(false)
+  expect(face.getAttribute('width')).toBe('420')
+  expect(face.getAttribute('height')).toBe('704')
+})
+
 it('shows both orientations and themes in selected card details', () => {
   render(<DeckExplorerHarness />)
 

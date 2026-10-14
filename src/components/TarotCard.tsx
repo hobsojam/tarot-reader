@@ -1,3 +1,5 @@
+import { cardBackSrc, cardFaceSrc } from '../domain/card-image'
+import { cardBackSize, cardFaceSize } from '../data/card-image-size'
 import type { Card } from '../domain/card'
 
 interface TarotCardProps {
@@ -30,13 +32,15 @@ export function TarotCard({
         <img
           alt={`${card.name} tarot card`}
           className={`tarot-card__image${orientation === 'reversed' ? ' tarot-card__image--reversed' : ''}`}
-          src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
+          src={cardFaceSrc(card.id, import.meta.env.BASE_URL)}
+          {...cardFaceSize(card.id)}
         />
       ) : (
         <img
           alt=""
           className="tarot-card__image"
-          src={`${import.meta.env.BASE_URL}card-back.png`}
+          src={cardBackSrc(import.meta.env.BASE_URL)}
+          {...cardBackSize}
         />
       )}
     </button>
