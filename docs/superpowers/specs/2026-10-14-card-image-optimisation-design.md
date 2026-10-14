@@ -231,6 +231,18 @@ CI check. The design treats them as artwork, not build output, and
 No other edits are made to the artwork: no cropping, colour change,
 sharpening, or metadata beyond what WebP encoding implies.
 
+### Confirmed decisions
+
+These were confirmed with the maintainer on 2026-10-14:
+
+- The 420 px face variants use WebP q90, not q82. Faithful artwork is worth
+  the extra 2.7 MB.
+- The WebP derivatives are committed. `AGENTS.md` is amended so that they
+  count as reviewed source artwork, not generated build output.
+- The setup page widens to its existing `max-width` as a result of the
+  layout-shift fix.
+- Implementation starts after PR #50, which has now merged.
+
 ## Markup changes
 
 ```tsx

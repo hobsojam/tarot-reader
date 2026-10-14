@@ -12,7 +12,7 @@
 
 ## Global Constraints
 
-- **Precondition:** start only after PR #50 (`fix/card-back-from-scan`) has merged, so the pipeline encodes the new 420 × 725 card back and the screenshot baselines already reflect it. Do not edit the card back's pixels in this work; only move and encode it.
+- **Precondition (met: PR #50 merged on 2026-10-14):** start only after PR #50 (`fix/card-back-from-scan`) has merged, so the pipeline encodes the new 420 × 725 card back and the screenshot baselines already reflect it. Do not edit the card back's pixels in this work; only move and encode it.
 - Do not crop, recolour, sharpen, or retouch any artwork. Resizing uses `sharp`'s default Lanczos 3 kernel; no other operation is applied.
 - Derivative widths and quality are fixed by the spec: card faces at 280 px (WebP q82) and 420 px (WebP q90); the card back at 420 px (WebP q90). Changing them is a spec change.
 - `sharp` is a dev dependency pinned to an exact version that was published at least 7 days before it is added (0.35.5 was published on 2026-09-27). It is never imported by application code.
