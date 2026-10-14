@@ -17,11 +17,10 @@ const card = {
 it('renders a revealed card face with descriptive alt text', () => {
   render(<TarotCard card={card} label="Past" onReveal={() => {}} revealed />)
 
-  expect(
-    screen
-      .getByRole('img', { name: /the fool tarot card/i })
-      .getAttribute('src'),
-  ).toBe('/cards/the-fool.png')
+  const face = screen.getByRole('img', { name: /the fool tarot card/i })
+  expect(face.getAttribute('src')).toBe('/cards/the-fool-420.webp')
+  expect(face.getAttribute('width')).toBe('420')
+  expect(face.getAttribute('height')).toBe('704')
   expect(
     screen.getByRole('img', { name: /the fool tarot card/i }).className,
   ).toBe('tarot-card__image')
@@ -34,7 +33,8 @@ it('shows a decorative back without exposing a face-down card identity', () => {
 
   expect(screen.queryByRole('img')).toBeNull()
   expect(screen.getByRole('button', { name: /past: face down/i })).toBeTruthy()
-  expect(container.querySelector('img')?.getAttribute('src')).toBe(
-    '/card-back.png',
-  )
+  const back = container.querySelector('img')
+  expect(back?.getAttribute('src')).toBe('/card-back-420.webp')
+  expect(back?.getAttribute('width')).toBe('420')
+  expect(back?.getAttribute('height')).toBe('725')
 })

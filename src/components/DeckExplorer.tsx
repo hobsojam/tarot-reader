@@ -1,3 +1,9 @@
+import {
+  cardFaceSrc,
+  cardFaceSrcSet,
+  explorerThumbnailSizes,
+} from '../domain/card-image'
+import { cardFaceSize } from '../data/card-image-size'
 import { useEffect, useRef } from 'react'
 import type { Card } from '../domain/card'
 import {
@@ -130,7 +136,14 @@ export function DeckExplorer({
                 <img
                   alt=""
                   loading="lazy"
-                  src={`${import.meta.env.BASE_URL}cards/${card.id}.png`}
+                  sizes={explorerThumbnailSizes}
+                  src={cardFaceSrc(
+                    card.id,
+                    import.meta.env.BASE_URL,
+                    'thumbnail',
+                  )}
+                  srcSet={cardFaceSrcSet(card.id, import.meta.env.BASE_URL)}
+                  {...cardFaceSize(card.id, 'thumbnail')}
                 />
                 <span>{card.name}</span>
               </button>
@@ -148,7 +161,8 @@ export function DeckExplorer({
           >
             <img
               alt={`${selectedCard.name} tarot card`}
-              src={`${import.meta.env.BASE_URL}cards/${selectedCard.id}.png`}
+              src={cardFaceSrc(selectedCard.id, import.meta.env.BASE_URL)}
+              {...cardFaceSize(selectedCard.id)}
             />
             <h3>{selectedCard.name}</h3>
             <button
