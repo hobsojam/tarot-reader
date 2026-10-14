@@ -78,8 +78,7 @@ export function revealAll(session: ReadingSession): ReadingSession {
     revealedPositionIds: new Set(
       session.spread.positions.map((position) => position.id),
     ),
-    selectedPositionId:
-      session.selectedPositionId ?? firstPosition?.id ?? null,
+    selectedPositionId: session.selectedPositionId ?? firstPosition?.id ?? null,
   }
 }
 

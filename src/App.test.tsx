@@ -140,6 +140,18 @@ it('uses the selected focus in the active reading narrative', () => {
   ).toMatch(/lens of relationship patterns/i)
 })
 
+it('renders the active reading with its selected spread', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: 'Celtic Cross' }))
+  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+
+  expect(
+    screen.getByRole('region', { name: 'Celtic Cross workspace' }),
+  ).toBeTruthy()
+  expect(screen.getAllByRole('button', { name: /face down/i })).toHaveLength(10)
+})
+
 it('opens reflection prompts only after every card is revealed', () => {
   render(<App />)
 
@@ -160,8 +172,8 @@ it('opens reflection prompts only after every card is revealed', () => {
 
   const reflection = screen.getByRole('region', { name: /reflection/i })
   expect(
-    within(reflection).getByRole('heading', { name: /completed thread/i }),
-  ).toBeTruthy()
+    within(reflection).queryByRole('heading', { name: /completed thread/i }),
+  ).toBeNull()
   const centerCard = within(reflection).getByRole('region', {
     name: /center of the reading/i,
   })

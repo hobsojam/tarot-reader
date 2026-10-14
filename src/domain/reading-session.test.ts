@@ -99,10 +99,9 @@ describe('reading sessions', () => {
       'past',
     )
 
-    expect(getRevealedReadingCards(revealed).map(({ position }) => position.id)).toEqual([
-      'past',
-      'future',
-    ])
+    expect(
+      getRevealedReadingCards(revealed).map(({ position }) => position.id),
+    ).toEqual(['past', 'future'])
     expect(isReadingComplete(revealed)).toBe(false)
     expect(isReadingComplete(revealAll(revealed))).toBe(true)
   })
