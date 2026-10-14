@@ -180,6 +180,18 @@ async function checkAsset(
   return problems
 }
 
+async function checkForServedPngs(publicDir: string): Promise<string[]> {
+  const problems: string[] = []
+  if (await exists(join(publicDir, 'card-back.png'))) {
+    problems.push('unexpected: card-back.png must not be served from public')
+  }
+  const cardFiles = await readdir(join(publicDir, 'cards'))
+  for (const file of cardFiles.filter((file) => file.endsWith('.png')).sort()) {
+    problems.push(`unexpected: cards/${file} must not be served from public`)
+  }
+  return problems
+}
+
 /** Returns one line per problem; an empty list means everything is current. */
 export async function checkCardImages(
   paths: CardImagePaths,
@@ -194,7 +206,10 @@ export async function checkCardImages(
     ...(await cardIds(paths.artworkDir)),
     ...Object.keys(manifest.cards),
   ])
-  const problems = await checkAsset(backAsset, manifest.back, paths)
+  const problems = [
+    ...(await checkForServedPngs(paths.publicDir)),
+    ...(await checkAsset(backAsset, manifest.back, paths)),
+  ]
   for (const id of [...ids].sort()) {
     problems.push(
       ...(await checkAsset(faceAsset(id), manifest.cards[id], paths)),
