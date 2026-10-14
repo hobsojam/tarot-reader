@@ -26,6 +26,11 @@ it('guides the reader through setup, reveal, and reflection', () => {
 
   fireEvent.click(screen.getByRole('button', { name: /reveal all/i }))
   expect(screen.getByText(/all cards revealed.*reflect/i)).toBeTruthy()
+  expect(
+    screen
+      .getByRole('button', { name: /reflect on this reading/i })
+      .classList.contains('reading-actions__primary'),
+  ).toBe(true)
 })
 
 it('keeps deck explorer study state when returning to setup', () => {

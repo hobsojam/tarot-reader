@@ -151,11 +151,21 @@ function App() {
               : 'Reveal a card to continue, in whichever order feels useful.'}
           </p>
           <div className="reading-actions">
-            <button onClick={handleRevealAll} type="button">
+            <button
+              className={
+                readingComplete ? undefined : 'reading-actions__primary'
+              }
+              onClick={handleRevealAll}
+              type="button"
+            >
               Reveal all
             </button>
             {readingComplete ? (
-              <button onClick={() => setShowReflection(true)} type="button">
+              <button
+                className="reading-actions__primary"
+                onClick={() => setShowReflection(true)}
+                type="button"
+              >
                 Reflect on this reading
               </button>
             ) : null}

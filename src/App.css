@@ -157,7 +157,7 @@ button {
 }
 
 .reading-setup button,
-.reading-actions button:first-child {
+.reading-actions__primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--surface);
