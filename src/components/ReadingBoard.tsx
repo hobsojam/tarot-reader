@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import type { DealtCard } from '../domain/card'
 import type { Spread } from '../domain/spread'
 import { TarotCard } from './TarotCard'
@@ -29,7 +30,12 @@ export function ReadingBoard({
           <div
             className="reading-position"
             key={position.id}
-            style={{ gridColumn: position.column, gridRow: position.row }}
+            style={
+              {
+                '--position-column': position.column,
+                '--position-row': position.row,
+              } as CSSProperties
+            }
           >
             <p aria-hidden="true" className="reading-position__label">
               {position.label}

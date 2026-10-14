@@ -212,6 +212,8 @@ button {
 }
 
 .reading-position {
+  grid-column: var(--position-column);
+  grid-row: var(--position-row);
   min-width: 0;
 }
 
@@ -362,8 +364,8 @@ button {
 
   .reading-board--five-card .reading-position,
   .reading-board--celtic-cross .reading-position {
-    grid-column: auto !important;
-    grid-row: auto !important;
+    grid-column: auto;
+    grid-row: auto;
     width: min(100%, 16rem);
   }
 

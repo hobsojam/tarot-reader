@@ -27,6 +27,17 @@ it.each([
   ).toBe(expectedClass)
 })
 
+it('exposes card placement for CSS to override at narrow widths', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
+
+  const position = screen.getByText('Foundation').closest('.reading-position')
+  expect(position?.style.gridColumn).toBe('')
+  expect(position?.style.getPropertyValue('--position-column')).toBe('2')
+})
+
 it('deals three face-down positions and reveals the activated card', () => {
   render(<App />)
 
