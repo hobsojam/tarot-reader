@@ -105,6 +105,10 @@ problems:
 
 ### 5. Derive explorer selection instead of syncing it with effects
 
+**Status: Complete (2026-10-14).** Selection is cleared by the search and
+category handlers, while click-event detail distinguishes keyboard activation
+from pointer activation. Browser coverage verifies both focus paths.
+
 `DeckExplorer.tsx` uses an effect to call `onSelectCard(null)` when a filter
 hides the selected card. That is setting state from an effect to repair
 derived state, and it costs an extra render. The keyboard-focus work adds
@@ -155,6 +159,10 @@ starter template and are not referenced anywhere.
 **Done when:** The files are deleted and lint, tests, and build still pass.
 
 ### 9. Decide whether card names are searchable
+
+**Status: Complete (2026-10-14).** Card-name search remains intentionally
+excluded. The visible, scrollable deck and category controls are the browsing
+path; the search label makes clear that it searches meanings only.
 
 The deck explorer deliberately excludes card names from meaning search, and
 a test protects that choice. Readers who type "Tower" or "Queen" get no
