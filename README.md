@@ -35,9 +35,9 @@ VITE_DISABLE_REVERSALS=true npm run build
 
 ## Licensing and artwork
 
-Project-created code, UI, card backs, and interpretation text use the MIT
-License. Card-face provenance must be recorded in `ATTRIBUTION.md` before any
-public-domain Rider-Waite-Smith artwork is added.
+Project-created code, UI, and interpretation text use the MIT License. The
+card faces and card back are public-domain Pamela Colman Smith artwork; their
+sources are recorded in `ATTRIBUTION.md`.
 
 ## Deployment
 

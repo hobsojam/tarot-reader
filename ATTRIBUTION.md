@@ -19,5 +19,8 @@ Lilies](https://commons.wikimedia.org/wiki/File:Waite%E2%80%93Smith_Tarot_Roses_
 by Pamela Colman Smith. Wikimedia Commons marks the original artwork public
 domain in the United States and its country of origin.
 
-The app's card back and interpretation text are original project material
-covered by the MIT License.
+## Original project material
+
+The application code, UI, and interpretation text are original project
+material covered by the MIT License. The card faces and card back above are
+public-domain artwork and are not relicensed by this project.
