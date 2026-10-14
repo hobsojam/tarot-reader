@@ -27,7 +27,7 @@ it.each([
   ).toBe(expectedClass)
 })
 
-it('deals three face-down positions and reveals a card with keyboard activation', () => {
+it('deals three face-down positions and reveals the activated card', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: /three card/i }))
@@ -36,7 +36,7 @@ it('deals three face-down positions and reveals a card with keyboard activation'
   const pastCard = screen.getByRole('button', { name: /past: face down/i })
   expect(screen.getAllByRole('button', { name: /face down/i })).toHaveLength(3)
 
-  fireEvent.keyDown(pastCard, { key: 'Enter' })
+  fireEvent.click(pastCard)
 
   expect(
     screen.getByRole('button', { name: /past: .+ revealed/i }),

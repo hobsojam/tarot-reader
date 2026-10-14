@@ -24,12 +24,6 @@ export function TarotCard({
       aria-label={accessibleLabel}
       className={`tarot-card${revealed ? ' tarot-card--revealed' : ''}`}
       onClick={onReveal}
-      onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault()
-          onReveal()
-        }
-      }}
       type="button"
     >
       {revealed ? (
