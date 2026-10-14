@@ -47,7 +47,8 @@ async function expectVisiblePositions(board: Locator, spread: SpreadCase) {
   await expect(board.locator('.reading-position')).toHaveCount(
     spread.labels.length,
   )
-  await expect(board.getByRole('heading', { level: 2 })).toHaveText([
+  await expect(board.getByRole('heading')).toHaveCount(0)
+  await expect(board.locator('.reading-position__label')).toHaveText([
     ...spread.labels,
   ])
   await expect(board.getByRole('button')).toHaveCount(spread.labels.length)
