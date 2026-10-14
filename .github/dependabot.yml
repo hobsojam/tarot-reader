@@ -9,6 +9,12 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       default-days: 7
+    groups:
+      # @vitest/coverage-v8 requires the exact matching vitest version.
+      vitest:
+        patterns:
+          - vitest
+          - '@vitest/*'
   - package-ecosystem: github-actions
     directory: /
     schedule:

@@ -8,5 +8,11 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     exclude: [...configDefaults.exclude, 'e2e/**/*.spec.ts'],
+    coverage: {
+      provider: 'v8',
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['src/**/*.test.{ts,tsx}'],
+      reporter: ['text-summary', 'lcov'],
+    },
   },
 })
