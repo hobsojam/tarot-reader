@@ -51,7 +51,7 @@ function App() {
 
   const startReading = () => {
     const { dealt } = deal(
-      shuffleDeck(createDeck()),
+      shuffleDeck(createDeck(cards)),
       selectedSpread.positions.length,
     )
     setShowReflection(false)

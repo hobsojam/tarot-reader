@@ -1,7 +1,8 @@
-import { cards } from '../data/cards'
 import type { Card, DealtCard } from './card'
 
-export const createDeck = (): Card[] => [...cards]
+export const createDeck = (cardsToCopy: readonly Card[]): Card[] => [
+  ...cardsToCopy,
+]
 
 export const shuffleDeck = (
   cardsToShuffle: readonly Card[],
