@@ -3,10 +3,13 @@
 ## Project Structure & Module Organization
 
 The app is a static React/Vite tarot simulator. Keep UI and domain code in
-`src/`, tests beside their modules as `*.test.ts(x)`, and public card images in
-`public/cards/`. Store deck, spread, and interpretation data in `src/data/`.
-Keep public-domain artwork provenance in `ATTRIBUTION.md`; do not add modern
-deck scans, publisher branding, or generated build output to source control.
+`src/`, tests beside their modules as `*.test.ts(x)`, normalized PNG card
+masters in `artwork/`, and the served WebP card images in `public/cards/`.
+Store deck, spread, and interpretation data in `src/data/`. Keep public-domain
+artwork provenance in `ATTRIBUTION.md`; do not add modern deck scans,
+publisher branding, or generated build output to source control. The WebP
+images produced by `npm run images` are reviewed source artwork, not build
+output: commit them, and regenerate them whenever a master changes.
 
 ## Build, Test, and Development Commands
 
@@ -19,10 +22,12 @@ npm run test:watch   # Run tests while developing
 npm run lint         # Run ESLint
 npm run format:check # Check Prettier formatting
 npm run build        # Type-check and produce the production build
+npm run images       # Regenerate the WebP card images from artwork/
+npm run images:check # Verify the committed card images match their masters
 ```
 
-Run `npm run lint`, `npm run format:check`, `npm test`, and `npm run build`
-before opening a pull request. GitHub Actions must run the same checks.
+Run `npm run lint`, `npm run format:check`, `npm test`, `npm run images:check`,
+and `npm run build` before opening a pull request. GitHub Actions must run the same checks.
 
 ## Coding Style & Naming Conventions
 

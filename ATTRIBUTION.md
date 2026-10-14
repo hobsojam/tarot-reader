@@ -2,7 +2,7 @@
 
 ## Rider-Waite-Smith card faces
 
-Card faces in `public/cards/` are normalized copies of the original 1909
+Card-face masters in `artwork/cards/` are normalized copies of the original 1909
 Rider-Waite-Smith deck scans in Wikimedia Commons’ [78-file TaionWC
 set](<https://commons.wikimedia.org/wiki/Category:Rider-Waite-Smith_tarot_deck_(TaionWC)>).
 The deck was illustrated by Pamela Colman Smith and published in 1909.
@@ -14,7 +14,7 @@ are included.
 
 ## Card back
 
-`public/card-back.png` is
+The card-back master `artwork/card-back.png` is
 [Waite–Smith Tarot Roses and Lilies cropped.jpg](https://commons.wikimedia.org/wiki/File:Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg),
 resized from 825 × 1425 to 420 × 725 pixels with no other edits. That file is
 a rotated and cropped version of a scan of an original 1909 card back from
@@ -23,6 +23,13 @@ possibly Pamela Colman Smith, and marks the image public domain
 (`PD-US-expired` and `PD-UK-unknown`).
 
 The modern vector tracing of the same design on Commons is not used.
+
+## Served images
+
+The files the app serves are derived from those masters by `npm run images`:
+`public/cards/<id>-280.webp` and `public/cards/<id>-420.webp` for each face,
+and `public/card-back-420.webp` for the back. Each is the master resized to
+that width and encoded as WebP, with no other edits.
 
 ## Original project material
 
