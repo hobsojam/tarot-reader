@@ -100,6 +100,24 @@ describe('card image optimisation', () => {
     ])
   })
 
+  it('reports PNG card art left in the public directory', async () => {
+    await generateCardImages(paths)
+    await writeMaster(join(paths.publicDir, 'cards', 'the-fool.png'), 4)
+
+    expect(await checkCardImages(paths)).toEqual([
+      'unexpected: cards/the-fool.png must not be served from public',
+    ])
+  })
+
+  it('reports a PNG card back left in the public directory', async () => {
+    await generateCardImages(paths)
+    await writeMaster(join(paths.publicDir, 'card-back.png'), 4)
+
+    expect(await checkCardImages(paths)).toEqual([
+      'unexpected: card-back.png must not be served from public',
+    ])
+  })
+
   it('reports a derivative that has lost fidelity', async () => {
     await generateCardImages(paths)
     await sharp({
