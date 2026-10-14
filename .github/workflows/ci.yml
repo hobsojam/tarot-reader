@@ -36,6 +36,8 @@ jobs:
             test-results/
           if-no-files-found: ignore
   sonar:
+    # Dependabot PRs cannot read SONAR_TOKEN, so the scan would always fail.
+    if: ${{ !startsWith(github.head_ref, 'dependabot/') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
