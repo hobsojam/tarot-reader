@@ -287,7 +287,10 @@ for (const spread of spreads) {
         await expect(page).toHaveScreenshot(
           `${spread.id}-${viewport.name}.png`,
           {
-            fullPage: true,
+            // Geometry assertions above cover the full reading. Keeping the
+            // visual baseline to the fixed viewport avoids platform-specific
+            // full-page heights when the serif fallback wraps by a pixel.
+            fullPage: false,
             // GitHub's Linux system font differs slightly from the local
             // Chromium baseline environment. The serif fallback also changes
             // some wrapped lines by one pixel, so allow its observed 9% page
