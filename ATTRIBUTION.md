@@ -15,9 +15,14 @@ are included.
 ## Card back
 
 `public/card-back.png` is a normalized copy of [Waite–Smith Tarot Roses and
-Lilies](https://commons.wikimedia.org/wiki/File:Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.svg),
-by Pamela Colman Smith. Wikimedia Commons marks the original artwork public
-domain in the United States and its country of origin.
+Lilies
+cropped.jpg](https://commons.wikimedia.org/wiki/File:Waite%E2%80%93Smith_Tarot_Roses_and_Lilies_cropped.jpg),
+a rotated and cropped scan of an original 1909 card back from Saskia Jansen's
+collection. Wikimedia Commons records the artist as unknown, possibly Pamela
+Colman Smith, and marks the image public domain (`PD-US-expired` and
+`PD-UK-unknown`).
+
+The modern vector tracing of the same design on Commons is not used.
 
 ## Original project material
 

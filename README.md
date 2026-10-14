@@ -36,8 +36,8 @@ VITE_DISABLE_REVERSALS=true npm run build
 ## Licensing and artwork
 
 Project-created code, UI, and interpretation text use the MIT License. The
-card faces and card back are public-domain Pamela Colman Smith artwork; their
-sources are recorded in `ATTRIBUTION.md`.
+card faces and card back are public-domain 1909 Rider-Waite-Smith artwork;
+their sources are recorded in `ATTRIBUTION.md`.
 
 ## Deployment
 
