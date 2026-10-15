@@ -9,6 +9,13 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       default-days: 7
+    ignore:
+      # typescript-eslint supports typescript >=4.8.4 <6.1.0. Remove this once
+      # it supports newer TypeScript releases.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
+          - version-update:semver-minor
     groups:
       # @vitest/coverage-v8 requires the exact matching vitest version.
       vitest:
