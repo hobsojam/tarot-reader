@@ -24,6 +24,8 @@ Items the review confirmed are already in the earlier backlog:
 
 ### 1. Give every card a distinct interpretation
 
+**Status: Complete (2026-10-14).**
+
 `src/data/cards.ts` builds all 56 Minor Arcana cards from templates. All
 fourteen cards in a suit share one theme (for example, every Wands card is
 "creative energy"). Upright meanings are just
@@ -48,7 +50,9 @@ Knight of Swords.
 
 ### 2. Add a Dependabot cooldown and a dependency audit
 
-`.github/dependabot.yml` has no cooldown, and CI does not audit installed
+**Status: Complete (2026-10-14).**
+
+At review, `.github/dependabot.yml` had no cooldown, and CI did not audit installed
 dependencies. Project policy requires both.
 
 **Done when:**
@@ -59,10 +63,12 @@ dependencies. Project policy requires both.
 
 ### 3. Keep the deploy workflow in line with CI
 
-`deploy-pages.yml` deploys whatever is on `main` without running lint,
-format, or tests. It pins `actions/checkout@v6` and `actions/setup-node@v6`
-while CI uses `@v7`. It also installs with `npm ci --ignore-scripts`, which
-CI does not.
+**Status: Complete (2026-10-14).**
+
+At review, `deploy-pages.yml` deployed whatever was on `main` without running
+lint, format, or tests. It pinned `actions/checkout@v6` and
+`actions/setup-node@v6` while CI used `@v7`. It also installed with
+`npm ci --ignore-scripts`, which CI did not.
 
 **Done when:**
 
@@ -73,6 +79,8 @@ CI does not.
 ## Priority 2 — Maintainability
 
 ### 4. Move reading-session logic out of `App.tsx`
+
+**Status: Complete (2026-10-14).**
 
 `App.tsx` holds eight pieces of `useState` and builds the reading inline: the
 selected position index, the revealed card/position pairs for the narrative,
@@ -105,6 +113,10 @@ problems:
 
 ### 5. Derive explorer selection instead of syncing it with effects
 
+**Status: Complete (2026-10-14).** Selection is cleared by the search and
+category handlers, while click-event detail distinguishes keyboard activation
+from pointer activation. Browser coverage verifies both focus paths.
+
 `DeckExplorer.tsx` uses an effect to call `onSelectCard(null)` when a filter
 hides the selected card. That is setting state from an effect to repair
 derived state, and it costs an extra render. The keyboard-focus work adds
@@ -127,6 +139,8 @@ dependency, which is an `exhaustive-deps` warning.
 
 ### 6. Remove `TarotCard`'s duplicate keyboard handler
 
+**Status: Complete (2026-10-14).**
+
 `TarotCard` renders a native `<button>` and also handles Enter and Space in
 `onKeyDown`. A native button already does this, so the handler is redundant
 and changes how keyboard activation works.
@@ -137,6 +151,8 @@ reveal test still passes using native button activation.
 ## Priority 3 — Accessibility and tidy-up
 
 ### 7. Fix the heading structure in readings
+
+**Status: Complete (2026-10-14).**
 
 Every board position renders its label as an `<h2>`, so a Celtic Cross
 reading has ten board headings at the same level as "Reading order", "Reading
@@ -149,12 +165,18 @@ checked with a test or browser assertion.
 
 ### 8. Remove unused Vite scaffold assets
 
+**Status: Complete (2026-10-14).**
+
 `src/assets/hero.png`, `react.svg`, and `vite.svg` are left over from the
 starter template and are not referenced anywhere.
 
 **Done when:** The files are deleted and lint, tests, and build still pass.
 
 ### 9. Decide whether card names are searchable
+
+**Status: Complete (2026-10-14).** Card-name search remains intentionally
+excluded. The visible, scrollable deck and category controls are the browsing
+path; the search label makes clear that it searches meanings only.
 
 The deck explorer deliberately excludes card names from meaning search, and
 a test protects that choice. Readers who type "Tower" or "Queen" get no

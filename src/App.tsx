@@ -9,21 +9,22 @@ import { DeckExplorer } from './components/DeckExplorer'
 import { cards } from './data/cards'
 import { readingFocuses } from './data/reading-focuses'
 import { spreads } from './data/spreads'
-import { createDeck, deal, orientCards, shuffleDeck } from './domain/deck'
 import type { DeckExplorerFilter } from './domain/deck-explorer'
 import { synthesizeReadingNarrative } from './domain/interpretation'
+import {
+  getNarrativeFraming,
+  getReflectionAnchor,
+  getRevealedReadingCards,
+  getSelectedReadingCard,
+  isReadingComplete,
+  revealAll,
+  revealPosition,
+  startReading,
+} from './domain/reading-session'
+import type { ReadingSession } from './domain/reading-session'
 import { reversedChanceFromStartupOption } from './domain/reversals'
-import type { DealtCard } from './domain/card'
-import type { ReadingFocus, ReadingFocusId } from './domain/reading-focus'
+import type { ReadingFocusId } from './domain/reading-focus'
 import type { Spread } from './domain/spread'
-
-interface ReadingSession {
-  cards: readonly DealtCard[]
-  customQuestion: string
-  focus: ReadingFocus
-  revealedPositionIds: ReadonlySet<string>
-  selectedPositionId: string | null
-}
 
 function App() {
   const [selectedSpreadId, setSelectedSpreadId] =
@@ -39,61 +40,39 @@ function App() {
   const [selectedExplorerCardId, setSelectedExplorerCardId] = useState<
     string | null
   >(null)
-  const selectedSpread = spreads.find(
-    (spread) => spread.id === selectedSpreadId,
-  )!
+  const selectedSpread =
+    spreads.find((spread) => spread.id === selectedSpreadId) ?? spreads[0]
   const reversedChance = reversedChanceFromStartupOption(
     import.meta.env.VITE_DISABLE_REVERSALS,
   )
-  const selectedFocus = readingFocuses.find(
-    (focus) => focus.id === selectedFocusId,
-  )!
+  const selectedFocus =
+    readingFocuses.find((focus) => focus.id === selectedFocusId) ??
+    readingFocuses[0]
 
-  const startReading = () => {
-    const { dealt } = deal(
-      shuffleDeck(createDeck()),
-      selectedSpread.positions.length,
-    )
+  if (!selectedSpread || !selectedFocus) return null
+
+  const handleStartReading = () => {
     setShowReflection(false)
-    setSession({
-      cards: orientCards(dealt, Math.random, reversedChance),
-      customQuestion:
-        selectedFocus.id === 'something-else' ? customQuestion.trim() : '',
-      focus: selectedFocus,
-      revealedPositionIds: new Set(),
-      selectedPositionId: null,
-    })
-  }
-
-  const revealPosition = (positionId: string) => {
-    setSession((current) => {
-      if (!current) return current
-      return {
-        ...current,
-        revealedPositionIds: new Set([
-          ...current.revealedPositionIds,
-          positionId,
-        ]),
-        selectedPositionId: positionId,
-      }
-    })
-  }
-
-  const revealAll = () => {
-    setSession((current) =>
-      current
-        ? {
-            ...current,
-            revealedPositionIds: new Set(
-              selectedSpread.positions.map((position) => position.id),
-            ),
-            selectedPositionId:
-              current.selectedPositionId ??
-              selectedSpread.positions[0]?.id ??
-              null,
-          }
-        : current,
+    setSession(
+      startReading({
+        cards,
+        spread: selectedSpread,
+        focus: selectedFocus,
+        customQuestion,
+        random: Math.random,
+        reversedChance,
+      }),
     )
+  }
+
+  const handleRevealPosition = (positionId: string) => {
+    setSession((current) =>
+      current ? revealPosition(current, positionId) : current,
+    )
+  }
+
+  const handleRevealAll = () => {
+    setSession((current) => (current ? revealAll(current) : current))
   }
 
   const startNewReading = () => {
@@ -101,37 +80,17 @@ function App() {
     setSession(null)
   }
 
-  const selectedIndex = session?.selectedPositionId
-    ? selectedSpread.positions.findIndex(
-        (position) => position.id === session.selectedPositionId,
-      )
-    : -1
+  const selectedReadingCard = session
+    ? getSelectedReadingCard(session)
+    : undefined
   const readingNarrative = session
     ? synthesizeReadingNarrative(
-        session.cards.flatMap((card, index) => {
-          const position = selectedSpread.positions[index]
-
-          return session.revealedPositionIds.has(position.id)
-            ? [{ card, position }]
-            : []
-        }),
-        session.customQuestion
-          ? `your question, “${session.customQuestion}”`
-          : session.focus.narrativeFraming,
+        getRevealedReadingCards(session),
+        getNarrativeFraming(session),
       )
     : ''
-  const isReadingComplete =
-    session?.revealedPositionIds.size === selectedSpread.positions.length
-  const reflectionAnchorIndex = selectedSpread.positions.findIndex(
-    (position) => position.id === selectedSpread.reflectionAnchorPositionId,
-  )
-  const reflectionAnchor =
-    session && reflectionAnchorIndex >= 0
-      ? {
-          card: session.cards[reflectionAnchorIndex],
-          position: selectedSpread.positions[reflectionAnchorIndex],
-        }
-      : undefined
+  const readingComplete = session ? isReadingComplete(session) : false
+  const reflectionAnchor = session ? getReflectionAnchor(session) : undefined
 
   return (
     <main className="app-shell">
@@ -170,8 +129,8 @@ function App() {
                 />
               </label>
             ) : null}
-            <button onClick={startReading} type="button">
-              Start reading
+            <button onClick={handleStartReading} type="button">
+              Begin reading
             </button>
           </div>
           <DeckExplorer
@@ -186,12 +145,27 @@ function App() {
         </>
       ) : (
         <>
+          <p className="reading-journey__cue">
+            {readingComplete
+              ? 'All cards revealed — take a moment to reflect on the thread that has emerged.'
+              : 'Reveal a card to continue, in whichever order feels useful.'}
+          </p>
           <div className="reading-actions">
-            <button onClick={revealAll} type="button">
+            <button
+              className={
+                readingComplete ? undefined : 'reading-actions__primary'
+              }
+              onClick={handleRevealAll}
+              type="button"
+            >
               Reveal all
             </button>
-            {isReadingComplete ? (
-              <button onClick={() => setShowReflection(true)} type="button">
+            {readingComplete ? (
+              <button
+                className="reading-actions__primary"
+                onClick={() => setShowReflection(true)}
+                type="button"
+              >
                 Reflect on this reading
               </button>
             ) : null}
@@ -203,26 +177,20 @@ function App() {
             Focus: {session.customQuestion || session.focus.label}
           </p>
           <section
-            aria-label={`${selectedSpread.name} workspace`}
-            className={`reading-workspace${selectedSpread.id === 'celtic-cross' ? ' reading-workspace--celtic-cross' : ''}`}
+            aria-label={`${session.spread.name} workspace`}
+            className={`reading-workspace reading-workspace--${session.spread.id}`}
           >
             <ReadingBoard
               cards={session.cards}
-              onReveal={revealPosition}
+              onReveal={handleRevealPosition}
               revealedPositionIds={session.revealedPositionIds}
-              spread={selectedSpread}
+              spread={session.spread}
             />
             <div className="reading-sidebar">
-              <ReadingGuide spread={selectedSpread} />
+              <ReadingGuide spread={session.spread} />
               <ReadingDetail
-                card={
-                  selectedIndex >= 0 ? session.cards[selectedIndex] : undefined
-                }
-                position={
-                  selectedIndex >= 0
-                    ? selectedSpread.positions[selectedIndex]
-                    : undefined
-                }
+                card={selectedReadingCard?.card}
+                position={selectedReadingCard?.position}
               />
             </div>
           </section>
@@ -241,8 +209,6 @@ function App() {
                   position={reflectionAnchor.position}
                 />
               ) : null}
-              <h3>Completed thread</h3>
-              <p>{readingNarrative}</p>
               <h3>Reflection prompts</h3>
               <ol>
                 <li>

@@ -12,7 +12,9 @@ and plan.
 
 ### Show complete card faces
 
-The current Rider-Waite-Smith source images are taller than the forced 2:3
+**Status: Complete (2026-10-14).**
+
+At review, the Rider-Waite-Smith source images were taller than the forced 2:3
 display frame. `object-fit: cover` crops borders, titles, and numbers in the
 explorer, reading board, detail panel, and reflection anchor.
 
@@ -22,7 +24,9 @@ a shared ratio. Browser screenshot coverage protects the result.
 
 ### Make every spread readable on narrow screens
 
-Three- and five-card spreads currently inherit the five-column Celtic Cross
+**Status: Complete (2026-10-14).**
+
+At review, three- and five-card spreads inherited the five-column Celtic Cross
 grid, leaving their cards and labels too narrow on phones.
 
 **Done when:** Each spread has an appropriate desktop layout and a narrow
@@ -31,6 +35,8 @@ horizontal overflow, squeezed artwork, or overflowing labels. The Celtic
 Cross remains recognisable without compromising legibility.
 
 ### Make selected explorer details keyboard-reachable
+
+**Status: Complete (2026-10-14).**
 
 Selecting an explorer card scrolls to its details while keyboard focus remains
 on the original card. A preserved selection can also scroll the reader away
@@ -43,6 +49,8 @@ appropriate, non-disruptive way.
 
 ### Honour reduced-motion preferences
 
+**Status: Complete (2026-10-14).**
+
 Explorer details request JavaScript smooth scrolling even for readers who
 prefer reduced motion.
 
@@ -51,7 +59,9 @@ minimal non-essential motion, under `prefers-reduced-motion: reduce`.
 
 ### Make Reveal all choose a useful detail
 
-After `Reveal all`, every card is visible but the detail panel still instructs
+**Status: Complete (2026-10-14).**
+
+At review, after `Reveal all`, every card was visible but the detail panel still instructed
 the reader to reveal a card.
 
 **Done when:** Revealing all selects the first reading-order position when
@@ -62,6 +72,8 @@ a card. The behaviour has an integration test.
 
 ### Optimise card imagery for browsing
 
+**Status: Complete (2026-10-14).**
+
 The 78 current card PNGs total about 52.8 MB. Lazy loading avoids an upfront
 download, but the deck explorer still fetches large originals as thumbnails.
 
@@ -70,6 +82,8 @@ detail views use an optimised larger variant. Artwork remains faithful and the
 asset sizes are measured before and after conversion.
 
 ### Establish a calm, ceremonial visual system
+
+**Status: Complete (2026-10-14).**
 
 The application has functional styling but lacks a deliberately unified visual
 language across setup, card reveal, reading detail, narrative, and reflection.
@@ -80,6 +94,8 @@ or the clarity of controls. Any motion is subtle and reduced-motion safe.
 
 ### Improve reading-state guidance
 
+**Status: Complete (2026-10-14).**
+
 The interaction should make the next meaningful action obvious at each stage:
 setup, partial reveal, complete reading, and reflection.
 
@@ -88,6 +104,8 @@ clear how to continue without turning the experience into a tutorial or adding
 unnecessary controls.
 
 ### Add browser-level visual and keyboard regression coverage
+
+**Status: Complete (2026-10-14).**
 
 JSDOM tests protect application logic but cannot verify crops, responsive
 layouts, focus movement, or real scrolling.
@@ -100,13 +118,17 @@ selection, and reduced-motion behaviour.
 
 ### Enable strict TypeScript checking
 
-An explicit strict compilation succeeds, but strict mode is not currently part
+**Status: Complete (2026-10-14).**
+
+At review, an explicit strict compilation succeeded, but strict mode was not part
 of the project configuration.
 
 **Done when:** `strict: true` is enabled in the appropriate TypeScript
 configuration and CI continues to pass without suppressions.
 
 ### Keep a reading's spread inside its session
+
+**Status: Complete (2026-10-14).**
 
 `ReadingSession` owns the dealt cards but derives its spread from separate
 setup state. The current UI prevents this becoming incorrect, but future
@@ -117,6 +139,8 @@ active reading, the session captures the selected spread or stores explicit
 card-position pairs.
 
 ### Correct card-back attribution
+
+**Status: Complete (2026-10-14).**
 
 The attribution file describes the card back as both sourced Pamela Colman
 Smith artwork and original project material.

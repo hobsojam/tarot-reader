@@ -43,7 +43,7 @@ export function DeckExplorer({
   const selectedCard = visibleCards.find((card) => card.id === selectedCardId)
   const detailRef = useRef<HTMLElement>(null)
   const cardButtonRefs = useRef(new Map<string, HTMLButtonElement>())
-  const keyboardSelectionPending = useRef(false)
+  const selectionCameFromKeyboard = useRef(false)
   const previousSelectedCardId = useRef(selectedCardId)
 
   const showDetails = (moveFocus: boolean) => {
@@ -60,24 +60,18 @@ export function DeckExplorer({
   }
 
   useEffect(() => {
-    if (selectedCardId && !selectedCard) {
-      onSelectCard(null)
-    }
-  }, [onSelectCard, selectedCard, selectedCardId])
-
-  useEffect(() => {
     if (selectedCard && selectedCardId !== previousSelectedCardId.current) {
-      showDetails(keyboardSelectionPending.current)
+      showDetails(selectionCameFromKeyboard.current)
     }
     previousSelectedCardId.current = selectedCardId
-    keyboardSelectionPending.current = false
+    selectionCameFromKeyboard.current = false
   }, [selectedCard, selectedCardId])
 
-  const selectCard = (cardId: string) => {
+  const selectCard = (cardId: string, fromKeyboard: boolean) => {
+    selectionCameFromKeyboard.current = fromKeyboard
     if (cardId === selectedCardId) {
-      if (keyboardSelectionPending.current) {
+      if (fromKeyboard) {
         showDetails(true)
-        keyboardSelectionPending.current = false
       }
       return
     }
@@ -90,7 +84,18 @@ export function DeckExplorer({
       <label className="deck-explorer__search">
         Search meanings
         <input
-          onChange={(event) => onSearchChange(event.target.value)}
+          onChange={(event) => {
+            const nextSearch = event.target.value
+            if (
+              selectedCardId &&
+              !filterDeckCards(cards, nextSearch, filter).some(
+                (card) => card.id === selectedCardId,
+              )
+            ) {
+              onSelectCard(null)
+            }
+            onSearchChange(nextSearch)
+          }}
           type="search"
           value={search}
         />
@@ -100,7 +105,17 @@ export function DeckExplorer({
           <button
             aria-pressed={filter === category.value}
             key={category.value}
-            onClick={() => onFilterChange(category.value)}
+            onClick={() => {
+              if (
+                selectedCardId &&
+                !filterDeckCards(cards, search, category.value).some(
+                  (card) => card.id === selectedCardId,
+                )
+              ) {
+                onSelectCard(null)
+              }
+              onFilterChange(category.value)
+            }}
             type="button"
           >
             {category.label}
@@ -118,12 +133,7 @@ export function DeckExplorer({
                 aria-pressed={card.id === selectedCardId}
                 className="deck-explorer__card"
                 key={card.id}
-                onClick={() => selectCard(card.id)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    keyboardSelectionPending.current = true
-                  }
-                }}
+                onClick={(event) => selectCard(card.id, event.detail === 0)}
                 ref={(element) => {
                   if (element) {
                     cardButtonRefs.current.set(card.id, element)

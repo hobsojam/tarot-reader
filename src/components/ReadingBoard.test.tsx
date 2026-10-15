@@ -20,18 +20,33 @@ it.each([
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: spreadName }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   expect(
     screen.getByRole('region', { name: `${spreadName} reading` }).className,
   ).toBe(expectedClass)
 })
 
+it('exposes card placement for CSS to override at narrow widths', () => {
+  render(<App />)
+
+  fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
+
+  const position = screen.getByText('Foundation').closest('.reading-position')
+  if (!(position instanceof HTMLElement)) {
+    throw new Error('Expected the Foundation reading position')
+  }
+
+  expect(position.style.gridColumn).toBe('')
+  expect(position.style.getPropertyValue('--position-column')).toBe('2')
+})
+
 it('deals three face-down positions and reveals the activated card', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: /three card/i }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   const pastCard = screen.getByRole('button', { name: /past: face down/i })
   expect(screen.getAllByRole('button', { name: /face down/i })).toHaveLength(3)
@@ -52,7 +67,7 @@ it('explains the numbered reading order for the selected spread', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   expect(
     screen.getByRole('region', { name: /celtic cross reading/i }).className,
@@ -71,7 +86,7 @@ it('groups the Celtic Cross board and reading guide in a workspace', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   const workspace = screen.getByRole('region', {
     name: /celtic cross workspace/i,
@@ -88,7 +103,7 @@ it('guides the reader before selection and separates contextual meanings after r
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: /three card/i }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   const detail = screen.getByRole('complementary', {
     name: /card interpretation/i,
@@ -137,7 +152,7 @@ it('guides the reader before selection and separates contextual meanings after r
 it('adds a progressive narrative after a card is revealed', () => {
   render(<App />)
 
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
   expect(screen.queryByRole('region', { name: /reading so far/i })).toBeNull()
 
   fireEvent.click(screen.getByRole('button', { name: /past: face down/i }))
@@ -153,7 +168,7 @@ it('labels board positions without adding page headings', () => {
   render(<App />)
 
   fireEvent.click(screen.getByRole('radio', { name: /celtic cross/i }))
-  fireEvent.click(screen.getByRole('button', { name: /start reading/i }))
+  fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   const board = screen.getByRole('region', { name: 'Celtic Cross reading' })
   expect(within(board).queryAllByRole('heading')).toHaveLength(0)

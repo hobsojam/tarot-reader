@@ -82,7 +82,7 @@ for (const viewport of [
       shiftWindow.__cardImagesArriving = false
     })
     await page
-      .getByRole('button', { name: 'Start reading', exact: true })
+      .getByRole('button', { name: 'Begin reading', exact: true })
       .click()
     await page.getByRole('button', { name: 'Reveal all', exact: true }).click()
     await waitForVisibleImages(page, '.reading-board img')

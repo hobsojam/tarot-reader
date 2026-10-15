@@ -197,7 +197,7 @@ it('keeps pointer selection focus on the selected card', () => {
 
   const card = screen.getByRole('button', { name: 'The Fool' })
   card.focus()
-  fireEvent.click(card)
+  fireEvent.click(card, { detail: 1 })
 
   expect(document.activeElement).toBe(card)
 })
