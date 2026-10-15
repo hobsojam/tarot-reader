@@ -34,8 +34,12 @@ it('exposes card placement for CSS to override at narrow widths', () => {
   fireEvent.click(screen.getByRole('button', { name: /begin reading/i }))
 
   const position = screen.getByText('Foundation').closest('.reading-position')
-  expect(position?.style.gridColumn).toBe('')
-  expect(position?.style.getPropertyValue('--position-column')).toBe('2')
+  if (!(position instanceof HTMLElement)) {
+    throw new Error('Expected the Foundation reading position')
+  }
+
+  expect(position.style.gridColumn).toBe('')
+  expect(position.style.getPropertyValue('--position-column')).toBe('2')
 })
 
 it('deals three face-down positions and reveals the activated card', () => {
