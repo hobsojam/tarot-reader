@@ -376,11 +376,11 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
+  :root:root *,
+  :root:root *::before,
+  :root:root *::after {
+    animation-duration: 0.01ms;
+    scroll-behavior: auto;
+    transition-duration: 0.01ms;
   }
 }
