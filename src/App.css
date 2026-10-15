@@ -125,9 +125,13 @@
 }
 
 .deck-explorer__detail {
+  box-sizing: border-box;
   background: var(--surface);
   border: 1px solid var(--accent-border);
   border-radius: 0.5rem;
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
   padding: 1rem;
   position: sticky;
   top: 1rem;
@@ -343,6 +347,9 @@ button {
   }
 
   .deck-explorer__detail {
+    max-height: none;
+    overflow-y: visible;
+    overscroll-behavior-y: auto;
     position: static;
   }
 }
