@@ -229,6 +229,32 @@ for (const viewport of [
   })
 }
 
+test('keeps long card details scrollable within a short desktop viewport', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 600 })
+  await page.goto('./')
+  await page
+    .getByRole('button', { name: 'The High Priestess', exact: true })
+    .click()
+
+  const details = page.getByRole('complementary', { name: 'Card details' })
+  const bounds = await details.boundingBox()
+  expect(bounds).not.toBeNull()
+  expect(bounds!.height).toBeLessThanOrEqual(568)
+  const pageScroll = await page.evaluate(() => window.scrollY)
+
+  await details.hover()
+  await page.mouse.wheel(0, 1200)
+  await expect
+    .poll(() => details.evaluate((panel) => panel.scrollTop))
+    .toBeGreaterThan(0)
+  await expect(
+    details.getByRole('heading', { name: 'Reversed meaning' }),
+  ).toBeInViewport()
+  expect(await page.evaluate(() => window.scrollY)).toBe(pageScroll)
+})
+
 test('uses instant explorer scrolling when reduced motion is preferred', async ({
   page,
 }) => {
