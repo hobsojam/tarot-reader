@@ -32,9 +32,9 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: playwright-results
-          path: |
-            playwright-report/
-            test-results/
+          # The HTML report already includes screenshots, diffs, and traces.
+          path: playwright-report/
+          retention-days: 7
           if-no-files-found: ignore
   sonar:
     # Dependabot PRs cannot read SONAR_TOKEN, so the scan would always fail.
