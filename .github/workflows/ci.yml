@@ -25,6 +25,7 @@ jobs:
       - run: npm run format:check
       - run: npm run images:check
       - run: npm test
+      - run: node --test .github/scripts/prune-artifacts.check.cjs
       - run: npm run build
       - run: npm run test:e2e -- --reporter=dot,html
       - name: Upload browser test artifacts
